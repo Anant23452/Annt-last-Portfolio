@@ -361,8 +361,9 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 .img-small{
     margin-top: 2vh;
     margin: auto;
-    width:20vh;
-    height:40vh;
+    width:20vw;
+    height:20vh;
+    border-radius: 12px;
     
     
     
