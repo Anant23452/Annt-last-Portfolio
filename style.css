@@ -71,6 +71,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   color:var(--gold);
   font-size:22px;
 }
+.logo-mark img{width:28px;height:28px;object-fit:contain;}
 
 .nav-links{
   position:absolute;
