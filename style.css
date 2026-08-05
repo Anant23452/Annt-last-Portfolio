@@ -113,44 +113,12 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
 .nav-actions{display:flex;align-items:center;gap:16px;}
 
-.energy-menu-button {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: 1px solid rgba(217, 164, 65, 0.35);
-  cursor: pointer;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-family: inherit;
-  font-size: 13px;
-  color: var(--text-dim);
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
+.
 
-.energy-menu-button:hover {
-  background-color: rgba(217, 164, 65, 0.12);
-  border-color: var(--gold);
-  color: var(--gold-soft);
-}
 
-.energy-tag-badge {
-  background-color: var(--gold);
-  color: #100c04;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 999px;
-  margin-left: 8px;
-  text-transform: uppercase;
-}
 
-.energy-arrow {
-  transition: transform 0.3s ease;
-}
 
-.energy-menu-button.active .energy-arrow {
-  transform: rotate(180deg);
-}
+
 
 .btn-outline{
   display:flex;align-items:center;gap:8px;
@@ -338,12 +306,15 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 }
 
 /* Left column */
-.hero-left{padding-bottom:40px;}
+.hero-left{
+    padding-bottom:40px;
+}
 .eyebrow{
   display:inline-flex;align-items:center;gap:10px;
   font-size:12px;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--gold-soft);
+  
   margin-bottom:26px;
+  
 }
 .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);}
 
