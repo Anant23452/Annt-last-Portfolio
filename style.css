@@ -56,8 +56,8 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   display:flex !important;
   align-items:center;
   justify-content:space-between;
-  padding:24px 64px;
-  background-color:rgba(10,9,8,0.92);
+  padding:10px 50px;
+  background-color:rgba(10, 9, 8, 0.055);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);
@@ -304,7 +304,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   align-items:end;
   gap:24px;
   min-height:80vh;
-  background: blue;
+  /* background: blue; */
 }
 
 /* Left column */
@@ -345,6 +345,41 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   cursor: pointer;
 }
 .cursor{color:var(--gold);font-weight:400;}
+
+
+
+
+.showcase{
+    
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-top:26px;
+  justify-content: center;
+  
+}
+.img-small{
+    margin-top: 2vh;
+    margin: auto;
+    width:20vh;
+    height:40vh;
+    
+    
+    
+    img{
+        width:100%;height:100%;object-fit:cover;
+    }
+  }
+  .img-big{
+    width:200px;height:133px;
+    border-radius:12px;
+    overflow:hidden;
+    background:rgba(217,164,65,0.08);
+    img{
+        width:100%;height:100%;object-fit:cover;
+    }
+  }
+
 
 .hero-desc{
   margin-top:26px;
