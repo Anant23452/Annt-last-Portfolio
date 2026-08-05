@@ -683,21 +683,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
 
 /* Brands strip */
-.brands-strip{
-  position:relative;z-index:1;
-  margin-top:16px;
-  padding:26px 0;
-  border-top:1px solid var(--line);
-  display:flex;flex-direction:column;align-items:center;gap:22px;
-}
-.brands-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-dim);}
-.brands-track{width:100%;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);}
-.brands-row{display:flex;gap:70px;width:max-content;animation:scrollBrands 22s linear infinite;}
-.brand{
-  display:flex;align-items:center;gap:10px;
-  font-size:14px;font-weight:500;color:var(--text-dim);
-  white-space:nowrap;
-}
+
 .brand-icon{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--text-dim);}
 
 @keyframes scrollBrands{
@@ -903,4 +889,10 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+}
+
+.project{
+  width: 100vw;
+  height: 100vh;
+  background: red;
 }
