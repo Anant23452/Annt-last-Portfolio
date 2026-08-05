@@ -1,6 +1,6 @@
 :root{
   --bg:#0a0908;
-  --bg-soft:#111010;
+  /* --bg-soft:#111010; */
   --gold:#d9a441;
   --gold-soft:#f0c876;
   --text:#f3f1ec;
@@ -895,4 +895,20 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   width: 100vw;
   height: 100vh;
   background: red;
+}
+.skills{
+  width: 100vw;
+  height: 100vh;
+  background: blueviolet;
+}
+.achievment{
+   width: 100vw;
+  height: 100vh;
+  background: rgb(222, 187, 255);
+
+}
+.footer{
+  width: 100vw;
+  height: 100px;
+  background: salmon;
 }
