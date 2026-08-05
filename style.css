@@ -333,15 +333,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 .hero-title .accent{color:var(--gold);}
 
 /* Proximity Character Illumination */
-.char {
-  display: inline-block;
-  position: relative;
-  will-change: transform, color, text-shadow;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
-              color 0.35s ease, 
-              text-shadow 0.35s ease;
-  cursor: pointer;
-}
+
 .cursor{color:var(--gold);font-weight:400;}
 
 .hero-desc{
