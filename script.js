@@ -394,12 +394,45 @@ function initCrazyCursor() {
   });
 }
 
+/* ---------- Interactive 3D Catalog Header Popup Parallax ---------- */
+function initCatalogPopupParallax() {
+  const headerWrap = document.getElementById('catalogHeaderWrap');
+  const popupFan = document.getElementById('popupImagesFan');
+  if (!headerWrap || !popupFan) return;
+
+  headerWrap.addEventListener('mousemove', (e) => {
+    const rect = headerWrap.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const tiltX = (y / rect.height) * -12;
+    const tiltY = (x / rect.width) * 16;
+
+    gsap.to(popupFan, {
+      rotateX: tiltX,
+      rotateY: tiltY,
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+  });
+
+  headerWrap.addEventListener('mouseleave', () => {
+    gsap.to(popupFan, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    });
+  });
+}
+
 /* Master Initialization */
 function boot() {
   initNavbarToggle();
   initProjectOrbit();
   initInteractiveTextHover();
   initCrazyCursor();
+  initCatalogPopupParallax();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 
@@ -471,54 +504,42 @@ function horizontalLoop(items, config) {
     const elems = gsap.utils.toArray(".elem");
     const loop = horizontalLoop(elems, {paused: false,repeat:-1});
     
-         var a =document.querySelectorAll(".stripe")
+         var a = document.querySelectorAll(".stripe");
          a.forEach(function(stripe){
            stripe.addEventListener("mousemove",()=>{
                 gsap.to(stripe.children[0],{
                     height:"100%",
-                    ease:Expo,
+                    ease:"expo.out",
                     duration:.3
-                })
+                });
                 gsap.to(stripe.children[1],{
                     opacity:0,
-                    ease:Expo,
+                    ease:"expo.out",
                     duration:.3,
-                    delay:.1,
-        
-                })
+                    delay:.1
+                });
                 gsap.to(stripe.children[0].children[0],{
                     opacity:1,
-                    ease:Expo,
-                    duration:.1,
-                  
-        
-                })
-        
-             }
-             )
+                    ease:"expo.out",
+                    duration:.1
+                });
+             });
              stripe.addEventListener("mouseleave",()=>{
-                gsap.to(stripe.children[0]//iska matlab stripe ke andar ka pahla children ko select karega
-                ,{
+                gsap.to(stripe.children[0],{
                     height:"0%",
-                    ease:Expo,
+                    ease:"expo.out",
                     duration:.3
-                })
+                });
                 gsap.to(stripe.children[1],{
                     opacity:1,
-                    ease:Expo,
+                    ease:"expo.out",
                     duration:.3,
                     delay:.3
-        
-                })
+                });
                 gsap.to(stripe.children[0].children[0],{
                     opacity:0,
-                    ease:Expo,
-                    duration:.1,
-                  
-        
-                })
-             }
-             )
-         })
-
-   
+                    ease:"expo.out",
+                    duration:.1
+                });
+             });
+         });
