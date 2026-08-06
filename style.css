@@ -301,7 +301,8 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 }
 
 .hero-grid{
-  position:relative;z-index:1;
+  position:relative;
+  /* z-index:1; */
   display:grid;
   grid-template-columns: 1fr 1.35fr;
   align-items:end;
