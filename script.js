@@ -426,6 +426,32 @@ function initCatalogPopupParallax() {
   });
 }
 
+/* ---------- Dynamic Project Row Background Color on Hover ---------- */
+function initProjectRowHover() {
+  const rows = document.querySelectorAll('.project-row');
+  
+  rows.forEach(row => {
+    const bg = row.getAttribute('data-bg') || '#0f141c';
+    
+    row.addEventListener('mouseenter', () => {
+      row.style.setProperty('--row-bg', bg);
+      gsap.to(row, {
+        backgroundColor: bg,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    });
+
+    row.addEventListener('mouseleave', () => {
+      gsap.to(row, {
+        backgroundColor: 'transparent',
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    });
+  });
+}
+
 /* Master Initialization */
 function boot() {
   initNavbarToggle();
@@ -433,6 +459,7 @@ function boot() {
   initInteractiveTextHover();
   initCrazyCursor();
   initCatalogPopupParallax();
+  initProjectRowHover();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 
