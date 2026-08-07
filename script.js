@@ -426,28 +426,91 @@ function initCatalogPopupParallax() {
   });
 }
 
-/* ---------- Dynamic Project Row Background Color on Hover ---------- */
+/* ---------- GSAP Ultra-Smooth Project Row Accordion Expansion ---------- */
 function initProjectRowHover() {
   const rows = document.querySelectorAll('.project-row');
-  
+  let activeRow = null;
+
   rows.forEach(row => {
     const bg = row.getAttribute('data-bg') || '#0f141c';
-    
+    const drawer = row.querySelector('.project-row-drawer');
+    const drawerContent = row.querySelector('.drawer-content');
+    const mediaBoxes = row.querySelectorAll('.media-box');
+
+    if (!drawer || !drawerContent) return;
+
     row.addEventListener('mouseenter', () => {
-      row.style.setProperty('--row-bg', bg);
+      // Smoothly collapse previously opened row
+      if (activeRow && activeRow !== row) {
+        const prevDrawer = activeRow.querySelector('.project-row-drawer');
+        const prevMedia = activeRow.querySelectorAll('.media-box');
+
+        gsap.killTweensOf([activeRow, prevDrawer, prevMedia]);
+        gsap.to(activeRow, { backgroundColor: 'transparent', duration: 0.6, ease: 'power2.out' });
+        gsap.to(prevDrawer, { height: 0, opacity: 0, duration: 0.5, ease: 'power3.inOut' });
+        gsap.to(prevMedia, { y: 25, scale: 0.95, opacity: 0, duration: 0.35, ease: 'power2.in' });
+        activeRow.classList.remove('active');
+      }
+
+      activeRow = row;
+      row.classList.add('active');
+
+      // Animate row background color
+      gsap.killTweensOf(row);
       gsap.to(row, {
         backgroundColor: bg,
-        duration: 0.5,
+        duration: 0.6,
         ease: 'power2.out'
       });
+
+      // Calculate target height
+      const targetHeight = drawerContent.offsetHeight;
+
+      // GSAP Smooth Expansion of Drawer
+      gsap.killTweensOf([drawer, mediaBoxes]);
+      gsap.to(drawer, {
+        height: targetHeight,
+        opacity: 1,
+        duration: 0.75,
+        ease: 'power3.out'
+      });
+
+      // Staggered pop-in of media boxes
+      gsap.fromTo(mediaBoxes,
+        { y: 35, scale: 0.94, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 0.65, stagger: 0.08, ease: 'back.out(1.2)' }
+      );
     });
 
     row.addEventListener('mouseleave', () => {
+      gsap.killTweensOf([row, drawer, mediaBoxes]);
+
+      // Retract drawer height smoothly
+      gsap.to(drawer, {
+        height: 0,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power3.inOut'
+      });
+
+      // Fade out background color
       gsap.to(row, {
         backgroundColor: 'transparent',
-        duration: 0.5,
+        duration: 0.6,
         ease: 'power2.out'
       });
+
+      // Reset media boxes
+      gsap.to(mediaBoxes, {
+        y: 25,
+        scale: 0.95,
+        opacity: 0,
+        duration: 0.4,
+        ease: 'power2.in'
+      });
+
+      row.classList.remove('active');
+      if (activeRow === row) activeRow = null;
     });
   });
 }
@@ -493,6 +556,45 @@ function initProximityTechIcons() {
   });
 }
 
+/* ---------- Footer 3D Folding Ribbon Shader Interactivity ---------- */
+function initFooterLiquidShaderName() {
+  const wrap = document.getElementById('footerHeroNameWrap');
+  const chars = document.querySelectorAll('.fold-char');
+  if (!wrap || chars.length === 0) return;
+
+  wrap.addEventListener('mousemove', (e) => {
+    const rect = wrap.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotX = (y / rect.height) * -20;
+    const rotY = (x / rect.width) * 24;
+
+    chars.forEach((char, index) => {
+      const charDelay = index * 2.5;
+      gsap.to(char, {
+        rotateX: rotX,
+        rotateY: rotY + charDelay,
+        translateZ: 15 + Math.abs(rotY) * 0.4,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    });
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    chars.forEach((char) => {
+      gsap.to(char, {
+        rotateX: 0,
+        rotateY: 0,
+        translateZ: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    });
+  });
+}
+
 /* Master Initialization */
 function boot() {
   initNavbarToggle();
@@ -502,6 +604,7 @@ function boot() {
   initCatalogPopupParallax();
   initProjectRowHover();
   initProximityTechIcons();
+  initFooterLiquidShaderName();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 
