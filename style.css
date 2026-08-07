@@ -1062,7 +1062,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   z-index: 30 !important;
   transform: translate(calc(-50% + var(--hover-x, 0px)), calc(-50% - 165px)) scale(1.38) rotate(0deg) !important;
   border-color: #ffffff;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 215, 0, 0.8);
+  box-shadow: 0 20px 45px rgba(84, 78, 15, 0.8), 0 0 35px rgba(255, 215, 0, 0.8);
 }
 
 .section-subtitle {
@@ -1385,9 +1385,131 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   color: #000000;
 }
 
-.btn-chunky:active {
-  transform: translate(2px, 2px);
-  box-shadow: 3px 3px 0px #100c04;
+/* ============================================================
+   Skills Section — TECHNICAL Title with Proximity 3D Tech Icon Pop
+   ============================================================ */
+
+.skills-heading-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0 40px;
+  margin-bottom: 30px;
+  z-index: 20;
+}
+
+.skills-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.skills-main-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 110px);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 25;
+}
+
+.skill-letter {
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+  background: linear-gradient(180deg, #ffffff 40%, var(--gold-soft) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.skill-letter.active-letter {
+  transform: translateY(-8px) scale(1.15);
+  text-shadow: 0 0 30px rgba(217, 164, 65, 0.9), 0 0 50px rgba(255, 215, 0, 0.6);
+}
+
+/* Proximity Field for Floating Transparent Tech Icons */
+.tech-icons-field {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Transparent Background Tech Icon Pop Box */
+.tech-icon-pop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold-soft);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(calc(-50% + var(--default-x)), calc(-50% + var(--default-y))) scale(0) rotate(-15deg);
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              opacity 0.35s ease, 
+              visibility 0.35s ease;
+  will-change: transform, opacity;
+  z-index: 22;
+}
+
+.tech-svg {
+  width: 54px;
+  height: 54px;
+  filter: drop-shadow(0 0 16px rgba(217, 164, 65, 0.8)) drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.icon-tag {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(16, 12, 4, 0.9);
+  border: 1px solid rgba(217, 164, 65, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Proximity Active Pop State */
+.tech-icon-pop.pop-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(calc(-50% + var(--default-x)), calc(-50% + var(--default-y) - 20px)) scale(1.2) rotate(0deg);
+}
+
+.tech-icon-pop.pop-active:hover {
+  transform: translate(calc(-50% + var(--default-x)), calc(-50% + var(--default-y) - 35px)) scale(1.45) rotate(0deg) !important;
+  color: #ffffff;
+  z-index: 35 !important;
+}
+
+.tech-icon-pop.pop-active:hover .tech-svg {
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 1)) drop-shadow(0 0 45px rgba(217, 164, 65, 0.9));
 }
 
 /* ============================================================

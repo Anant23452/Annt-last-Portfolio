@@ -452,6 +452,47 @@ function initProjectRowHover() {
   });
 }
 
+/* ---------- Localized Proximity 3D Tech Icon Pop ---------- */
+function initProximityTechIcons() {
+  const container = document.getElementById('skillsHeadingContainer');
+  const letters = document.querySelectorAll('.skill-letter');
+  const icons = document.querySelectorAll('.tech-icon-pop');
+  
+  if (!container || letters.length === 0 || icons.length === 0) return;
+
+  container.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    letters.forEach((letter, index) => {
+      const rect = letter.getBoundingClientRect();
+      const letterCenterX = rect.left + rect.width / 2;
+      const letterCenterY = rect.top + rect.height / 2;
+      
+      const distance = Math.hypot(mouseX - letterCenterX, mouseY - letterCenterY);
+      const matchingIcon = document.querySelector(`.tech-icon-pop[data-target-index="${index}"]`);
+
+      // If mouse is within 140px proximity of letter
+      if (distance < 140) {
+        letter.classList.add('active-letter');
+        if (matchingIcon) {
+          matchingIcon.classList.add('pop-active');
+        }
+      } else {
+        letter.classList.remove('active-letter');
+        if (matchingIcon) {
+          matchingIcon.classList.remove('pop-active');
+        }
+      }
+    });
+  });
+
+  container.addEventListener('mouseleave', () => {
+    letters.forEach(letter => letter.classList.remove('active-letter'));
+    icons.forEach(icon => icon.classList.remove('pop-active'));
+  });
+}
+
 /* Master Initialization */
 function boot() {
   initNavbarToggle();
@@ -460,6 +501,7 @@ function boot() {
   initCrazyCursor();
   initCatalogPopupParallax();
   initProjectRowHover();
+  initProximityTechIcons();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 
