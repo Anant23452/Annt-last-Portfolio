@@ -595,6 +595,303 @@ function initFooterLiquidShaderName() {
   });
 }
 
+/* ---------- Interactive 3D Achievement Title Parallax ---------- */
+function initAchievementTitleParallax() {
+  const container = document.getElementById('achievementHeadingContainer');
+  const chars = document.querySelectorAll('.achieve-char');
+  if (!container || chars.length === 0) return;
+
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const tiltX = (y / rect.height) * -22;
+    const tiltY = (x / rect.width) * 26;
+
+    chars.forEach((char, index) => {
+      const offset = (index - chars.length / 2) * 2.2;
+      gsap.to(char, {
+        rotateX: tiltX,
+        rotateY: tiltY + offset,
+        translateZ: 18 + Math.abs(offset) * 0.8,
+        duration: 0.45,
+        ease: 'power2.out'
+      });
+    });
+  });
+
+  container.addEventListener('mouseleave', () => {
+    chars.forEach((char) => {
+      gsap.to(char, {
+        rotateX: 0,
+        rotateY: 0,
+        translateZ: 0,
+        duration: 0.7,
+        ease: 'power2.out'
+      });
+    });
+  });
+}
+
+/* ============================================================
+   Awwwards-Grade Matter.js Interactive Physics Container
+   - 25 Premium Glassmorphism Boxes attached along top edge initially
+   - Gravity OFF initially; turns ON when 60% enters viewport
+   - Boxes fall from top, collide mid-air, bounce softly & settle
+   - Dragging with MouseConstraint pushes neighboring boxes
+   - 1000px unbreakable walls + hard position clamping
+   ============================================================ */
+
+function initFooterCTAPhysics() {
+  const container = document.getElementById('footerCtaContainer');
+  const layer = document.getElementById('physicsWorldLayer');
+  if (!container || !layer || typeof Matter === 'undefined') return;
+
+  const { Engine, Render, Runner, Bodies, Composite, Mouse, MouseConstraint, Body, Events } = Matter;
+
+  // 1. Create Physics Engine (Gravity OFF initially)
+  const engine = Engine.create({
+    gravity: { x: 0, y: 0, scale: 0.001 }
+  });
+
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+
+  // 2. Create Canvas Renderer
+  const render = Render.create({
+    element: layer,
+    engine: engine,
+    options: {
+      width: width,
+      height: height,
+      wireframes: false,
+      background: 'transparent',
+      pixelRatio: window.devicePixelRatio || 1
+    }
+  });
+
+  Render.run(render);
+  const runner = Runner.create();
+  Runner.run(runner, engine);
+
+  // 3. Create Unbreakable Static Boundary Walls (1000px thick)
+  const wallThick = 1000;
+  let walls = [];
+
+  function createWalls(w, h) {
+    if (walls.length > 0) Composite.remove(engine.world, walls);
+
+    walls = [
+      // Top Ceiling Wall
+      Bodies.rectangle(w / 2, -wallThick / 2, w + 2000, wallThick, { isStatic: true, restitution: 0.35, friction: 0.2 }),
+      // Bottom Floor Wall
+      Bodies.rectangle(w / 2, h + wallThick / 2 - 10, w + 2000, wallThick, { isStatic: true, restitution: 0.35, friction: 0.2 }),
+      // Left Wall (Unbreakable 1000px barrier on Left!)
+      Bodies.rectangle(-wallThick / 2, h / 2, wallThick, h + 2000, { isStatic: true, restitution: 0.35, friction: 0.2 }),
+      // Right Wall
+      Bodies.rectangle(w + wallThick / 2, h / 2, wallThick, h + 2000, { isStatic: true, restitution: 0.35, friction: 0.2 })
+    ];
+
+    Composite.add(engine.world, walls);
+  }
+
+  createWalls(width, height);
+
+  // 4. Generate 25 Premium Glassmorphism Boxes
+  const colorPalettes = [
+    { fill: '#d9a441', stroke: '#ffe082', glow: 'rgba(217, 164, 65, 0.75)' },
+    { fill: '#1a1610', stroke: '#d9a441', glow: 'rgba(217, 164, 65, 0.45)' },
+    { fill: '#ffffff', stroke: '#f0c876', glow: 'rgba(255, 255, 255, 0.85)' },
+    { fill: '#8c2d00', stroke: '#ff7b3d', glow: 'rgba(236, 91, 23, 0.65)' },
+    { fill: '#121c2b', stroke: '#4a90e2', glow: 'rgba(74, 144, 226, 0.65)' },
+    { fill: '#251a30', stroke: '#9b51e0', glow: 'rgba(155, 81, 224, 0.65)' },
+    { fill: '#0f2219', stroke: '#20bf6b', glow: 'rgba(32, 191, 107, 0.65)' },
+    { fill: '#141e24', stroke: '#00d2d3', glow: 'rgba(0, 210, 211, 0.65)' }
+  ];
+
+  const boxBodies = [];
+  const TOTAL_BOXES = 25;
+
+  for (let i = 0; i < TOTAL_BOXES; i++) {
+    const palette = colorPalettes[i % colorPalettes.length];
+    
+    // Vary width, height, corner radius
+    const boxW = Math.floor(52 + (i * 7) % 45);
+    const boxH = Math.floor(42 + (i * 11) % 40);
+    const cornerR = 14 + (i % 8);
+
+    // Initial position: Attached along TOP EDGE of parent container
+    const spawnX = Math.max(50, Math.min(width - 50, (width / (TOTAL_BOXES + 1)) * (i + 1) + (Math.random() * 20 - 10)));
+    const spawnY = 24 + (i % 3) * 16; // Stacked along top edge
+
+    const body = Bodies.rectangle(spawnX, spawnY, boxW, boxH, {
+      restitution: 0.35, // Soft natural bounce
+      friction: 0.12,
+      frictionAir: 0.02,
+      density: 0.003,
+      chamfer: { radius: cornerR },
+      render: { visible: false }
+    });
+
+    // Slight random initial rotation along top edge
+    Body.setAngle(body, (Math.random() - 0.5) * 0.4);
+
+    body.customStyle = {
+      w: boxW,
+      h: boxH,
+      radius: cornerR,
+      fill: palette.fill,
+      stroke: palette.stroke,
+      glow: palette.glow
+    };
+    body.isGrabbed = false;
+    boxBodies.push(body);
+  }
+
+  Composite.add(engine.world, boxBodies);
+
+  // 5. Scroll Trigger: Enable Gravity when 60% of section enters viewport
+  let gravityTriggered = false;
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !gravityTriggered) {
+        gravityTriggered = true;
+        
+        // Turn ON Gravity & release all 25 boxes from top edge
+        engine.gravity.y = 1.0;
+
+        boxBodies.forEach((b, idx) => {
+          // Add a subtle mid-air push so they tumble softly
+          const impulseX = (Math.random() - 0.5) * 0.002;
+          const impulseY = 0.003 + (idx % 4) * 0.001;
+          Body.applyForce(b, b.position, { x: impulseX, y: impulseY });
+        });
+      }
+
+      // Pause/resume engine runner for performance when out of view
+      if (entry.isIntersecting) {
+        Runner.start(runner, engine);
+      } else {
+        Runner.stop(runner);
+      }
+    });
+  }, { threshold: 0.6 }); // 60% Viewport Threshold
+
+  scrollObserver.observe(container);
+
+  // 6. User Interactivity: Mouse & Touch Constraint Dragging
+  const mouse = Mouse.create(render.canvas);
+  const mouseConstraint = MouseConstraint.create(engine, {
+    mouse: mouse,
+    constraint: {
+      stiffness: 0.22,
+      damping: 0.1,
+      render: { visible: false }
+    }
+  });
+
+  Composite.add(engine.world, mouseConstraint);
+  render.mouse = mouse;
+
+  Events.on(mouseConstraint, 'startdrag', (evt) => {
+    if (evt.body) evt.body.isGrabbed = true;
+  });
+
+  Events.on(mouseConstraint, 'enddrag', (evt) => {
+    if (evt.body) evt.body.isGrabbed = false;
+  });
+
+  // 7. Awwwards Canvas Glassmorphism Renderer
+  Events.on(render, 'afterRender', () => {
+    const ctx = render.context;
+
+    boxBodies.forEach((b) => {
+      const pos = b.position;
+      const angle = b.angle;
+      const cfg = b.customStyle;
+
+      ctx.save();
+      ctx.translate(pos.x, pos.y);
+      ctx.rotate(angle);
+
+      // Scaling on drag
+      const scale = b.isGrabbed ? 1.15 : 1.0;
+      ctx.scale(scale, scale);
+
+      // Glassmorphism Soft Glow & Shadow
+      ctx.shadowColor = cfg.glow;
+      ctx.shadowBlur = b.isGrabbed ? 28 : 16;
+
+      ctx.fillStyle = cfg.fill;
+      ctx.strokeStyle = cfg.stroke;
+      ctx.lineWidth = b.isGrabbed ? 3.5 : 2;
+
+      ctx.beginPath();
+      ctx.roundRect(-cfg.w / 2, -cfg.h / 2, cfg.w, cfg.h, cfg.radius);
+      ctx.fill();
+      ctx.stroke();
+
+      // Specular Glass Reflection Layer
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.24)';
+      ctx.beginPath();
+      ctx.roundRect(-cfg.w / 2 + 3, -cfg.h / 2 + 3, cfg.w - 6, Math.max(8, cfg.h * 0.35), [cfg.radius, cfg.radius, 0, 0]);
+      ctx.fill();
+
+      ctx.restore();
+    });
+  });
+
+  // 8. Strict Position Clamping (No box can EVER leave the container!)
+  Events.on(engine, 'beforeUpdate', () => {
+    const curW = container.clientWidth;
+    const curH = container.clientHeight;
+    const pad = 30;
+
+    boxBodies.forEach((b) => {
+      // Idle slow rotation tilt
+      if (!b.isGrabbed && gravityTriggered) {
+        Body.setAngularVelocity(b, b.angularVelocity * 0.98);
+      }
+
+      // Hard Boundary Clamping Guard
+      if (b.position.x < pad) {
+        Body.setPosition(b, { x: pad, y: b.position.y });
+        if (b.velocity.x < 0) Body.setVelocity(b, { x: 0, y: b.velocity.y });
+      }
+      if (b.position.x > curW - pad) {
+        Body.setPosition(b, { x: curW - pad, y: b.position.y });
+        if (b.velocity.x > 0) Body.setVelocity(b, { x: 0, y: b.velocity.y });
+      }
+      if (b.position.y < pad) {
+        Body.setPosition(b, { x: b.position.x, y: pad });
+        if (b.velocity.y < 0) Body.setVelocity(b, { x: b.position.x, y: 0 });
+      }
+      if (b.position.y > curH - pad) {
+        Body.setPosition(b, { x: b.position.x, y: curH - pad });
+        if (b.velocity.y > 0) Body.setVelocity(b, { x: b.velocity.x, y: 0 });
+      }
+    });
+  });
+
+  // 9. ResizeObserver for Auto Resizing
+  const ro = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+      const cr = entry.contentRect;
+      if (cr.width > 0 && cr.height > 0) {
+        render.canvas.width = cr.width;
+        render.canvas.height = cr.height;
+        render.options.width = cr.width;
+        render.options.height = cr.height;
+        createWalls(cr.width, cr.height);
+      }
+    }
+  });
+
+  ro.observe(container);
+}
+
 /* Master Initialization */
 function boot() {
   initNavbarToggle();
@@ -605,6 +902,8 @@ function boot() {
   initProjectRowHover();
   initProximityTechIcons();
   initFooterLiquidShaderName();
+  initAchievementTitleParallax();
+  initFooterCTAPhysics();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 

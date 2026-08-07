@@ -1559,10 +1559,110 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 }
 
 /* ============================================================
-   Achievements Section
+   Achievements Section — 3D Shader Title with Extruded Shadow & Tilt
    ============================================================ */
+
+.achievement-heading-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 20px;
+  margin-bottom: 40px;
+  perspective: 1200px;
+  user-select: none;
+  z-index: 10;
+}
+
+.achievement-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.achievement-main-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7.5vw, 96px);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  margin-bottom: 16px;
+}
+
+.achieve-char {
+  display: inline-block;
+  transform-style: preserve-3d;
+  color: #f0c876;
+  font-weight: 900;
+  
+  /* Specular Metallic Gold Gradient */
+  background: linear-gradient(
+    115deg,
+    #996515 0%,
+    #d9a441 25%,
+    #ffffff 50%,
+    #ffe082 75%,
+    #996515 100%
+  );
+  background-size: 240% 240%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  /* 3D Extruded Deep Shadow Layer Stack */
+  text-shadow: 
+    0 1px 0 #b38222,
+    0 2px 0 #946917,
+    0 3px 0 #75510f,
+    0 4px 0 #573b09,
+    0 8px 18px rgba(0, 0, 0, 0.85);
+  
+  animation: achieveFluidWave 3.5s ease-in-out infinite, achieveShineSweep 6s linear infinite;
+  animation-delay: calc(var(--i, 0) * 0.12s);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, background-position;
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .achieve-char {
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes achieveFluidWave {
+  0% {
+    transform: translateY(0px) rotateY(-14deg) rotateZ(0deg) translateZ(0px);
+  }
+  50% {
+    transform: translateY(-16px) rotateY(14deg) rotateZ(3deg) translateZ(28px);
+  }
+  100% {
+    transform: translateY(0px) rotateY(-14deg) rotateZ(0deg) translateZ(0px);
+  }
+}
+
+@keyframes achieveShineSweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .achievment {
-  min-height: 90vh;
+  min-height: 80vh;
   width: 100%;
   background: linear-gradient(180deg, #0a0908 0%, #17140e 50%, #0a0908 100%);
   border-top: 1px solid var(--line);
@@ -1571,26 +1671,114 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   z-index: 5;
 }
 
-.achievement-grid {
+/* ============================================================
+   Standalone Flagship LeetCode Achievement Showcase Card
+   ============================================================ */
+
+.leetcode-single-showcase {
+  max-width: 900px;
+  margin: 20px auto 0;
+  width: 100%;
+}
+
+.leetcode-card-inner {
+  background: linear-gradient(135deg, rgba(30, 24, 16, 0.95) 0%, rgba(18, 14, 10, 0.95) 100%);
+  border: 2px solid var(--gold);
+  border-radius: 24px;
+  padding: 48px 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 32px;
+  grid-template-columns: 0.8fr 1.6fr;
+  align-items: center;
+  gap: 40px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(217, 164, 65, 0.25);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
-.achievement-card {
-  background: rgba(22, 19, 15, 0.85);
-  border: 1px solid rgba(217, 164, 65, 0.25);
+.leetcode-card-inner:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 45px rgba(217, 164, 65, 0.4);
+  border-color: #ffffff;
+}
+
+.leetcode-badge-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(217, 164, 65, 0.08);
+  border: 1px solid rgba(217, 164, 65, 0.3);
+  padding: 32px 20px;
   border-radius: 20px;
-  padding: 36px 28px;
-  position: relative;
-  backdrop-filter: blur(12px);
-  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  text-align: center;
 }
 
-.achievement-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--gold);
-  box-shadow: 0 16px 36px rgba(217, 164, 65, 0.15);
+.leetcode-hero-num {
+  font-family: var(--font-display);
+  font-size: clamp(54px, 6vw, 76px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(217, 164, 65, 0.5);
+}
+
+.leetcode-hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.14em;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+.leetcode-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.leetcode-tag {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold-soft);
+  background: rgba(217, 164, 65, 0.15);
+  border: 1px solid rgba(217, 164, 65, 0.4);
+  padding: 4px 14px;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.leetcode-card-content h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.leetcode-card-content p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+.leetcode-topics-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.leetcode-topics-pills span {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 12px;
+  border-radius: 999px;
 }
 
 .achievement-badge {
@@ -1710,15 +1898,68 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   }
 }
 
-.footer-cta h2 {
+/* ============================================================
+   Interactive Matter.js Physics Container & Centered Hero Content
+   ============================================================ */
+
+.footer-cta {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+  border-radius: 28px;
+  background: radial-gradient(circle at 50% 50%, rgba(26, 22, 16, 0.95) 0%, rgba(12, 10, 8, 0.98) 100%);
+  border: 1.5px solid rgba(217, 164, 65, 0.3);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), inset 0 0 35px rgba(217, 164, 65, 0.1);
+  margin-bottom: 50px;
+}
+
+.physics-world-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.physics-world-layer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+}
+
+.footer-cta-content {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 760px;
+  user-select: none;
+}
+
+.footer-cta-content a,
+.footer-cta-content button {
+  pointer-events: auto;
+}
+
+.footer-cta-title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 48px);
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 28px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.95), 0 0 35px rgba(217, 164, 65, 0.35);
+  letter-spacing: -0.01em;
 }
 
 .footer-bottom {

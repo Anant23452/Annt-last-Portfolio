@@ -625,6 +625,18 @@
             <li>Brand Identity</li>
           </ul>
         </div>
+
+        <div class="skill-category">
+          <h3>Backend & DevOps Tools</h3>
+          <ul class="skill-tags">
+            <li>Node.js / Express</li>
+            <li>Python / FastAPI</li>
+            <li>PostgreSQL / MongoDB</li>
+            <li>Docker / Kubernetes</li>
+            <li>AWS / GCP Cloud Services</li>
+            <li>CI/CD & GitHub Actions</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -632,24 +644,49 @@
   <!-- Achievements Section -->
   <section class="achievment" id="awards" data-scroll-section>
     <div class="section-container">
-      <h2 class="section-title">Achievements & Milestones</h2>
-      <p class="section-subtitle">Recognition, hackathon wins, and professional accomplishments.</p>
+      
+      <!-- Interactive 3D Shader Title Container -->
+      <div class="achievement-heading-container" id="achievementHeadingContainer">
+        <span class="achievement-eyebrow">Recognition & Milestones</span>
+        <h2 class="achievement-main-title" id="achievementMainTitle">
+          <span class="achieve-char" style="--i:0">A</span>
+          <span class="achieve-char" style="--i:1">C</span>
+          <span class="achieve-char" style="--i:2">H</span>
+          <span class="achieve-char" style="--i:3">I</span>
+          <span class="achieve-char" style="--i:4">E</span>
+          <span class="achieve-char" style="--i:5">V</span>
+          <span class="achieve-char" style="--i:6">E</span>
+          <span class="achieve-char" style="--i:7">M</span>
+          <span class="achieve-char" style="--i:8">E</span>
+          <span class="achieve-char" style="--i:9">N</span>
+          <span class="achieve-char" style="--i:10">T</span>
+          <span class="achieve-char" style="--i:11">S</span>
+        </h2>
+        <p class="section-subtitle">Recognition, hackathon wins, and professional accomplishments.</p>
+      </div>
 
-      <div class="achievement-grid">
-        <div class="achievement-card">
-          <div class="achievement-badge">01</div>
-          <h3>Global AI Innovation Hackathon Winner</h3>
-          <p>Awarded First Place for building an autonomous multi-agent code refactoring engine.</p>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-badge">02</div>
-          <h3>AWAWDS Site of the Day Candidate</h3>
-          <p>Recognized for exceptional interactive web design, fluidity, and micro-animations.</p>
-        </div>
-        <div class="achievement-card">
-          <div class="achievement-badge">03</div>
-          <h3>100K+ Open Source Downloads</h3>
-          <p>Creator of popular developer utility packages and creative coding UI components.</p>
+      <!-- Standalone Flagship LeetCode Achievement Card -->
+      <div class="leetcode-single-showcase">
+        <div class="leetcode-card-inner">
+          <div class="leetcode-badge-wrap">
+            <span class="leetcode-hero-num">250+</span>
+            <span class="leetcode-hero-label">PROBLEMS SOLVED</span>
+          </div>
+          
+          <div class="leetcode-card-content">
+            <div class="leetcode-tag">⚡ Competitive Programming & DSA</div>
+            <h3>250+ LeetCode Questions Solved</h3>
+            <p>Demonstrated mastery across complex Data Structures & Algorithms, including Dynamic Programming, Graph Theory, Trees, Greedy Approaches, and High-Performance System Logic Optimization.</p>
+            
+            <div class="leetcode-topics-pills">
+              <span>Dynamic Programming</span>
+              <span>Graph Theory</span>
+              <span>Binary Trees</span>
+              <span>Sliding Window</span>
+              <span>Two Pointers</span>
+              <span>Backtracking</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -658,11 +695,18 @@
   <!-- Footer Section -->
   <footer class="footer" id="contact" data-scroll-section>
     <div class="footer-container">
-      <div class="footer-cta">
-        <h2>Let's build something extraordinary together.</h2>
-        <a href="mailto:contact@alokkumar.dev" class="btn-fill">
-          <span>Get in Touch</span>
-        </a>
+      <!-- Interactive Matter.js Physics Container -->
+      <div class="footer-cta" id="footerCtaContainer">
+        <!-- Physics Canvas World Layer -->
+        <div class="physics-world-layer" id="physicsWorldLayer"></div>
+
+        <!-- Centered Text & Button Layer (Always Above Physics Objects) -->
+        <div class="footer-cta-content">
+          <h2 class="footer-cta-title">Let's build something extraordinary together.</h2>
+          <a href="mailto:contact@alokkumar.dev" class="btn-fill">
+            <span>Get in Touch</span>
+          </a>
+        </div>
       </div>
 
       <!-- 3D Folding Shader Headline — Annt k -->
@@ -693,6 +737,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
 <script src="script.js"></script>
