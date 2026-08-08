@@ -1,887 +1,958 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — Home</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- Custom Crazy Liquid Magnetic Cursor & Canvas Particle Trail -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"><span class="cursor-label"></span></div>
-<canvas id="particleCanvas"></canvas>
+  <!-- Custom Crazy Liquid Magnetic Cursor & Canvas Particle Trail -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"><span class="cursor-label"></span></div>
+  <canvas id="particleCanvas"></canvas>
 
-<!-- ============================================================
+  <!-- ============================================================
      NEW CINEMATIC 3D STUDIO-IDENT PRELOADER
      DARKNESS → 3D SPACE → PROJECT UNIVERSE → CONVERGENCE → ANANT K → WEBSITE
      ============================================================ -->
-<div id="pl" class="pl">
-  <!-- Ambient particle canvas -->
-  <canvas class="pl-canvas" id="plCanvas"></canvas>
+  <div id="pl" class="pl">
+    <!-- Ambient particle canvas -->
+    <canvas class="pl-canvas" id="plCanvas"></canvas>
 
-  <!-- Depth vignette overlay -->
-  <div class="pl-vignette" id="plVignette"></div>
+    <!-- Depth vignette overlay -->
+    <div class="pl-vignette" id="plVignette"></div>
 
-  <!-- Cinematic light shaft (horizontal) -->
-  <div class="pl-shaft" id="plShaft"></div>
+    <!-- Cinematic light shaft (horizontal) -->
+    <div class="pl-shaft" id="plShaft"></div>
 
-  <!-- 3D World — CSS perspective container holding all panels -->
-  <div class="pl-world" id="plWorld">
+    <!-- 3D World — CSS perspective container holding all panels -->
+    <div class="pl-world" id="plWorld">
 
-    <!-- LAYER 1 — FAR BACKGROUND (Z -1200 to -800) -->
-    <div class="pl-panel pl-panel--bg" style="--tx:-38%;--ty:-15%;--tz:-1200px;--rx:8deg;--ry:14deg;--rz:-3deg;--s:1.1">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="3D WebGL" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--bg" style="--tx:42%;--ty:20%;--tz:-1050px;--rx:-6deg;--ry:-12deg;--rz:4deg;--s:1.0">
-      <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=700&q=80" alt="AI Neural" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--bg" style="--tx:-5%;--ty:35%;--tz:-900px;--rx:10deg;--ry:5deg;--rz:-5deg;--s:0.9">
-      <img src="https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?w=700&q=80" alt="Digital Interface" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
+      <!-- LAYER 1 — FAR BACKGROUND (Z -1200 to -800) -->
+      <div class="pl-panel pl-panel--bg"
+        style="--tx:-38%;--ty:-15%;--tz:-1200px;--rx:8deg;--ry:14deg;--rz:-3deg;--s:1.1">
+        <img src="assets/gallary.png" alt="3D WebGL" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--bg"
+        style="--tx:42%;--ty:20%;--tz:-1050px;--rx:-6deg;--ry:-12deg;--rz:4deg;--s:1.0">
+        <img src="assets/animated1.png" alt="AI Neural" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--bg" style="--tx:-5%;--ty:35%;--tz:-900px;--rx:10deg;--ry:5deg;--rz:-5deg;--s:0.9">
+        <img src="assets/newbert 1.png" alt="Digital Interface" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
 
-    <!-- LAYER 2 — MIDGROUND (Z -600 to -350) -->
-    <div class="pl-panel pl-panel--mid" style="--tx:-55%;--ty:5%;--tz:-620px;--rx:-5deg;--ry:18deg;--rz:2deg;--s:1.2">
-      <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=80" alt="Generative AI" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--mid" style="--tx:50%;--ty:-22%;--tz:-550px;--rx:7deg;--ry:-15deg;--rz:-4deg;--s:1.15">
-      <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=700&q=80" alt="Creative Code" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--mid" style="--tx:15%;--ty:42%;--tz:-480px;--rx:-8deg;--ry:8deg;--rz:6deg;--s:1.05">
-      <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=700&q=80" alt="SaaS Dashboard" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--mid" style="--tx:-30%;--ty:-30%;--tz:-400px;--rx:5deg;--ry:-10deg;--rz:-2deg;--s:1.1">
-      <img src="https://images.unsplash.com/photo-1588912914076-6df7028a4a15?w=700&q=80" alt="Tech Interface" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
+      <!-- LAYER 2 — MIDGROUND (Z -600 to -350) -->
+      <div class="pl-panel pl-panel--mid" style="--tx:-55%;--ty:5%;--tz:-620px;--rx:-5deg;--ry:18deg;--rz:2deg;--s:1.2">
+        <img src="assets/gallary2.png" alt="Generative AI" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--mid"
+        style="--tx:50%;--ty:-22%;--tz:-550px;--rx:7deg;--ry:-15deg;--rz:-4deg;--s:1.15">
+        <img src="assets/colocola.png" alt="Creative Code" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--mid" style="--tx:15%;--ty:42%;--tz:-480px;--rx:-8deg;--ry:8deg;--rz:6deg;--s:1.05">
+        <img src="assets/modernweb1.png" alt="SaaS Dashboard" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--mid"
+        style="--tx:-30%;--ty:-30%;--tz:-400px;--rx:5deg;--ry:-10deg;--rz:-2deg;--s:1.1">
+        <img src="assets/project_creative.jpg" alt="Tech Interface" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
 
-    <!-- LAYER 3 — FOREGROUND (Z -200 to 0) — largest, most imposing -->
-    <div class="pl-panel pl-panel--fg" style="--tx:-62%;--ty:-8%;--tz:-220px;--rx:-3deg;--ry:22deg;--rz:1deg;--s:1.3">
-      <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&q=80" alt="Modern Web" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--fg" style="--tx:58%;--ty:12%;--tz:-180px;--rx:4deg;--ry:-20deg;--rz:-3deg;--s:1.25">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80" alt="Developer Setup" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--fg" style="--tx:-15%;--ty:52%;--tz:-120px;--rx:-10deg;--ry:6deg;--rz:5deg;--s:1.2">
-      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Digital World" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--fg" style="--tx:22%;--ty:-45%;--tz:-80px;--rx:6deg;--ry:-8deg;--rz:-6deg;--s:1.15">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Circuit Board" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
-    <div class="pl-panel pl-panel--fg" style="--tx:-42%;--ty:30%;--tz:-40px;--rx:-4deg;--ry:16deg;--rz:3deg;--s:1.1">
-      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80" alt="Matrix Code" loading="eager">
-      <div class="pl-panel-glare"></div>
-    </div>
+      <!-- LAYER 3 — FOREGROUND (Z -200 to 0) — largest, most imposing -->
+      <div class="pl-panel pl-panel--fg" style="--tx:-62%;--ty:-8%;--tz:-220px;--rx:-3deg;--ry:22deg;--rz:1deg;--s:1.3">
+        <img src="assets/webimage.png" alt="Modern Web" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--fg"
+        style="--tx:58%;--ty:12%;--tz:-180px;--rx:4deg;--ry:-20deg;--rz:-3deg;--s:1.25">
+        <img src="assets/full web.png" alt="Developer Setup" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--fg" style="--tx:-15%;--ty:52%;--tz:-120px;--rx:-10deg;--ry:6deg;--rz:5deg;--s:1.2">
+        <img src="assets/digital_world.jpg" alt="Digital World" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--fg" style="--tx:22%;--ty:-45%;--tz:-80px;--rx:6deg;--ry:-8deg;--rz:-6deg;--s:1.15">
+        <img src="assets/colocola.png" alt="Circuit Board" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
+      <div class="pl-panel pl-panel--fg" style="--tx:-42%;--ty:30%;--tz:-40px;--rx:-4deg;--ry:16deg;--rz:3deg;--s:1.1">
+        <img src="assets/newbert 1.png" alt="Matrix Code" loading="eager">
+        <div class="pl-panel-glare"></div>
+      </div>
 
-  </div><!-- /.pl-world -->
+    </div><!-- /.pl-world -->
 
-  <!-- ANANT K Identity Reveal -->
-  <div class="pl-identity" id="plIdentity">
+    <!-- ANANT K Identity Reveal -->
+    <div class="pl-identity" id="plIdentity">
 
-    <!-- Thin light line that sweeps before reveal -->
-    <div class="pl-scanline" id="plScanline"></div>
+      <!-- Thin light line that sweeps before reveal -->
+      <div class="pl-scanline" id="plScanline"></div>
 
-    <!-- ANANT K Custom SVG Wordmark -->
-    <svg class="pl-logo-svg" id="plLogoSvg" viewBox="0 0 900 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ANANT K">
-      <defs>
-        <linearGradient id="plGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%"   stop-color="#ffffff"/>
-          <stop offset="28%"  stop-color="#f7e0a0"/>
-          <stop offset="65%"  stop-color="#d4a03a"/>
-          <stop offset="100%" stop-color="#8a5f1a"/>
-        </linearGradient>
-        <!-- Clip path that opens left→right for reveal -->
-        <clipPath id="plRevealClip">
-          <rect id="plClipRect" x="0" y="0" width="0" height="160"/>
-        </clipPath>
-        <!-- Light sweep gradient -->
-        <linearGradient id="plSweep" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
-          <stop offset="40%"  stop-color="rgba(255,255,255,0.9)"/>
-          <stop offset="50%"  stop-color="#ffffff"/>
-          <stop offset="60%"  stop-color="rgba(255,255,255,0.9)"/>
-          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-        </linearGradient>
-        <mask id="plSweepMask">
-          <text x="450" y="122" text-anchor="middle" font-family="'Sora','Arial Black',sans-serif" font-size="130" font-weight="900" letter-spacing="18" fill="white">ANANT K</text>
-        </mask>
-      </defs>
+      <!-- ANANT K Custom SVG Wordmark -->
+      <svg class="pl-logo-svg" id="plLogoSvg" viewBox="0 0 900 160" fill="none" xmlns="http://www.w3.org/2000/svg"
+        aria-label="ANANT K">
+        <defs>
+          <linearGradient id="plGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="28%" stop-color="#f7e0a0" />
+            <stop offset="65%" stop-color="#d4a03a" />
+            <stop offset="100%" stop-color="#8a5f1a" />
+          </linearGradient>
+          <!-- Clip path that opens left→right for reveal -->
+          <clipPath id="plRevealClip">
+            <rect id="plClipRect" x="0" y="0" width="0" height="160" />
+          </clipPath>
+          <!-- Light sweep gradient -->
+          <linearGradient id="plSweep" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+            <stop offset="40%" stop-color="rgba(255,255,255,0.9)" />
+            <stop offset="50%" stop-color="#ffffff" />
+            <stop offset="60%" stop-color="rgba(255,255,255,0.9)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+          </linearGradient>
+          <mask id="plSweepMask">
+            <text x="450" y="122" text-anchor="middle" font-family="'Sora','Arial Black',sans-serif" font-size="130"
+              font-weight="900" letter-spacing="18" fill="white">ANANT K</text>
+          </mask>
+        </defs>
 
-      <!-- Ghost outline — always visible at low opacity -->
-      <text class="pl-text-ghost" x="450" y="122" text-anchor="middle"
-            font-family="'Sora','Arial Black',sans-serif" font-size="130" font-weight="900" letter-spacing="18"
-            fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1">ANANT K</text>
+        <!-- Ghost outline — always visible at low opacity -->
+        <text class="pl-text-ghost" x="450" y="122" text-anchor="middle" font-family="'Sora','Arial Black',sans-serif"
+          font-size="130" font-weight="900" letter-spacing="18" fill="none" stroke="rgba(255,255,255,0.08)"
+          stroke-width="1">ANANT K</text>
 
-      <!-- Filled gold wordmark — revealed via clip-path animation -->
-      <g clip-path="url(#plRevealClip)">
-        <text class="pl-text-fill" x="450" y="122" text-anchor="middle"
-              font-family="'Sora','Arial Black',sans-serif" font-size="130" font-weight="900" letter-spacing="18"
-              fill="url(#plGold)">ANANT K</text>
-      </g>
+        <!-- Filled gold wordmark — revealed via clip-path animation -->
+        <g clip-path="url(#plRevealClip)">
+          <text class="pl-text-fill" x="450" y="122" text-anchor="middle" font-family="'Sora','Arial Black',sans-serif"
+            font-size="130" font-weight="900" letter-spacing="18" fill="url(#plGold)">ANANT K</text>
+        </g>
 
-      <!-- Light sweep overlay (fires after full reveal) -->
-      <rect id="plSweepRect" x="-900" y="0" width="900" height="160"
-            fill="url(#plSweep)" mask="url(#plSweepMask)"/>
-    </svg>
+        <!-- Light sweep overlay (fires after full reveal) -->
+        <rect id="plSweepRect" x="-900" y="0" width="900" height="160" fill="url(#plSweep)" mask="url(#plSweepMask)" />
+      </svg>
 
-    <!-- Tagline beneath logo -->
-    <p class="pl-tagline" id="plTagline">Creative Developer &amp; AI Engineer</p>
+      <!-- Tagline beneath logo -->
+      <p class="pl-tagline" id="plTagline">Creative Developer &amp; AI Engineer</p>
 
-  </div><!-- /.pl-identity -->
+    </div><!-- /.pl-identity -->
 
-</div><!-- /#pl -->
+  </div><!-- /#pl -->
 
-<!-- Fixed Header Navbar -->
-<header class="navbar" id="navbar">
-  <a href="#" class="logo">
-    <span class="logo-mark"><img src="assets/hero.png" alt=""></span>
-    <span class="logo-name">Annt k</span>
-  </a>
-
-  <!-- Desktop & Mobile Navigation Links -->
-  <nav class="nav-links" id="navLinks">
-    <a href="#" class="active">Home<span class="dot"></span></a>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#experience">Experience</a>
-    <a href="#awards">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="nav-actions">
-   
-
-    <a href="#contact" class="btn-outline">
-      <span>Let's Connect</span>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <!-- Fixed Header Navbar -->
+  <header class="navbar" id="navbar">
+    <a href="#" class="logo">
+      <span class="logo-mark"><img src="assets/hero.png" alt=""></span>
+      <span class="logo-name">Annt k</span>
     </a>
 
-    <!-- Hamburger Icon Button -->
-    <button class="menu-btn" id="burgerMenuBtn" aria-label="Toggle Menu">
-      <div class="burger-line"></div>
-      <div class="burger-line"></div>
-    </button>
-  </div>
+    <!-- Desktop & Mobile Navigation Links -->
+    <nav class="nav-links" id="navLinks">
+      <a href="#" class="active">Home<span class="dot"></span></a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#awards">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-  <!-- Energy Dropdown Panel -->
- 
-</header>
+    <div class="nav-actions">
 
-<div id="main" data-scroll-container>
 
-  <main class="hero" id="home" data-scroll-section>
-    <div class="hero-glow"></div>
+      <a href="#contact" class="btn-outline">
+        <span>Let's Connect</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
 
-    <div class="hero-grid">
-
-      <div class="hero-left">
-       
-
-        <h1 class="hero-title">
-          <span class="line" data-anim="reveal-line">Designing</span>
-          <span class="line accent" data-anim="reveal-line">Digital</span>
-          <span class="line" data-anim="reveal-line">Experiences<span class="cursor">_</span></span>
-        </h1>
-
-      <div class="show-case">
-        <!-- Futuristic Interactive AI Terminal Workspace Panel -->
-        <div class="ai-terminal-showcase" id="aiTerminalShowcase">
-          <!-- Background Particle & Grid Canvas -->
-          <canvas class="ai-bg-canvas" id="aiBgCanvas"></canvas>
-
-          <!-- Interactive Golden Cursor Spotlight Blur -->
-          <div class="ai-spotlight" id="aiSpotlight"></div>
-
-          <!-- Realistic Developer Terminal Window -->
-          <div class="terminal-window" id="terminalWindow">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-yellow"></span>
-                <span class="dot dot-green"></span>
-              </div>
-              <div class="terminal-title">ai-agent-os.sh</div>
-              <div class="terminal-status"><span class="status-dot"></span>ACTIVE</div>
-            </div>
-            <div class="terminal-body" id="terminalBody">
-              <div class="terminal-line" id="termLine1"></div>
-              <div class="terminal-line" id="termLine2"></div>
-              <div class="terminal-line" id="termLine3"></div>
-              <div class="terminal-line" id="termLine4"></div>
-              <div class="terminal-line prompt-line">
-                <span id="termActiveLine"></span><span class="terminal-cursor">█</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-       
-
-       
-      </div>
-
-      <div class="hero-center">
-        <div class="hero-image-wrap">
-          <!-- Intense Background Glow Layer -->
-          <div class="hero-bg-glow-intense"></div>
-
-          <!-- Outer Circular Arch -->
-          <div class="hero-arch-outer"></div>
-
-          <!-- Inner Circular Arch with Project Orbit Showcase -->
-          <div class="hero-arch-inner" id="archInner">
-            <div class="orbit-container" id="orbitContainer">
-              <div class="orbit-card">
-                <img src="assets/project_ai.jpg" alt="AI Agent OS">
-                <div class="orbit-card-info">
-                  <span>AI Agent OS</span>
-                </div>
-              </div>
-              <div class="orbit-card">
-                <img src="assets/project_3d.jpg" alt="3D Web App">
-                <div class="orbit-card-info">
-                  <span>3D Web App</span>
-                </div>
-              </div>
-              <div class="orbit-card">
-                <img src="assets/project_saas.jpg" alt="Fintech SaaS">
-                <div class="orbit-card-info">
-                  <span>Fintech SaaS</span>
-                </div>
-              </div>
-              <div class="orbit-card">
-                <img src="assets/project_creative.jpg" alt="Creative Studio">
-                <div class="orbit-card-info">
-                  <span>Creative Studio</span>
-                </div>
-              </div>
-              <div class="orbit-card">
-                <img src="assets/project_generative.jpg" alt="Generative AI">
-                <div class="orbit-card-info">
-                  <span>Generative AI</span>
-                </div>
-              </div>
-              <div class="orbit-card">
-                <img src="assets/project_cloud.jpg" alt="Cloud Neural Net">
-                <div class="orbit-card-info">
-                  <span>Cloud Neural Net</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-image-glow"></div>
-          <img src="assets/hero.png" alt="Alok Kumar portrait" class="hero-image">
-        </div>
-      </div>
-
-      <div class="hero-right"></div>
-
+      <!-- Hamburger Icon Button -->
+      <button class="menu-btn" id="burgerMenuBtn" aria-label="Toggle Menu">
+        <div class="burger-line"></div>
+        <div class="burger-line"></div>
+      </button>
     </div>
 
-    <!-- ══ Premium Dual-Row Infinite Marquee ══ -->
-    <div class="mq-section" id="mqSection">
+    <!-- Energy Dropdown Panel -->
 
-      <!-- Decorative header label -->
-      <div class="mq-label">
-        <span class="mq-label-line"></span>
-        <span class="mq-label-text">CAPABILITIES</span>
-        <span class="mq-label-line"></span>
-      </div>
+  </header>
 
-      <!-- ROW 1 — moves LEFT (default) -->
-      <div class="mq-row mq-row--left">
-        <div class="mq-track" id="mqTrack1">
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>AI Engineer</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Three.js</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Creative Dev</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>React</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>WebGL</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Node.js</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>GSAP</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Backend API</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Python</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Motion Design</div>
-          <!-- Duplicate for seamless loop -->
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>AI Engineer</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Three.js</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Creative Dev</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>React</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>WebGL</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Node.js</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>GSAP</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Backend API</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Python</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Motion Design</div>
+  <div id="main" data-scroll-container>
+
+    <main class="hero" id="home" data-scroll-section>
+      <div class="hero-glow"></div>
+
+      <div class="hero-grid">
+
+        <div class="hero-left">
+
+
+          <h1 class="hero-title">
+            <span class="line" data-anim="reveal-line">Designing</span>
+            <span class="line accent" data-anim="reveal-line">Digital</span>
+            <span class="line" data-anim="reveal-line">Experiences<span class="cursor">_</span></span>
+          </h1>
+
+          <div class="show-case">
+            <!-- Futuristic Interactive AI Terminal Workspace Panel -->
+            <div class="ai-terminal-showcase" id="aiTerminalShowcase">
+              <!-- Background Particle & Grid Canvas -->
+              <canvas class="ai-bg-canvas" id="aiBgCanvas"></canvas>
+
+              <!-- Interactive Golden Cursor Spotlight Blur -->
+              <div class="ai-spotlight" id="aiSpotlight"></div>
+
+              <!-- Realistic Developer Terminal Window -->
+              <div class="terminal-window" id="terminalWindow">
+                <div class="terminal-header">
+                  <div class="terminal-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
+                  </div>
+                  <div class="terminal-title">ai-agent-os.sh</div>
+                  <div class="terminal-status"><span class="status-dot"></span>ACTIVE</div>
+                </div>
+                <div class="terminal-body" id="terminalBody">
+                  <div class="terminal-line" id="termLine1"></div>
+                  <div class="terminal-line" id="termLine2"></div>
+                  <div class="terminal-line" id="termLine3"></div>
+                  <div class="terminal-line" id="termLine4"></div>
+                  <div class="terminal-line prompt-line">
+                    <span id="termActiveLine"></span><span class="terminal-cursor">█</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
         </div>
-      </div>
 
-      <!-- ROW 2 — moves RIGHT -->
-      <div class="mq-row mq-row--right">
-        <div class="mq-track" id="mqTrack2">
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>TypeScript</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>LLM Agents</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>PostgreSQL</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>UI / UX</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>REST APIs</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Full Stack</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Docker</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Next.js</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>CSS Art</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Open AI</div>
-          <!-- Duplicate for seamless loop -->
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>TypeScript</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>LLM Agents</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>PostgreSQL</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>UI / UX</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>REST APIs</div>
-          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Full Stack</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Docker</div>
-          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Next.js</div>
-          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>CSS Art</div>
-          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Open AI</div>
+        <div class="hero-center">
+          <div class="hero-image-wrap">
+            <!-- Intense Background Glow Layer -->
+            <div class="hero-bg-glow-intense"></div>
+
+            <!-- Outer Circular Arch -->
+            <div class="hero-arch-outer"></div>
+
+            <!-- Inner Circular Arch with Project Orbit Showcase -->
+            <div class="hero-arch-inner" id="archInner">
+              <div class="orbit-container" id="orbitContainer">
+                <div class="orbit-card">
+                  <img src="assets/newbert 1.png" alt="AI Agent OS">
+                  <div class="orbit-card-info">
+                    <span>Newbert</span>
+                  </div>
+                </div>
+                <div class="orbit-card">
+                  <img src="assets/animated1.png" alt="3D Web App">
+                  <div class="orbit-card-info">
+                    <!-- <span>3D Web App</span> -->
+                  </div>
+                </div>
+                <div class="orbit-card">
+                  <img src="assets/full web.png" alt="Fintech SaaS">
+                  <div class="orbit-card-info">
+                    <!-- <span>Fintech SaaS</span> -->
+                  </div>
+                </div>
+                <div class="orbit-card">
+                  <img src="assets/gallary.png" alt="Creative Studio">
+                  <div class="orbit-card-info">
+                    <span>Creative Studio</span>
+                  </div>
+                </div>
+                <div class="orbit-card">
+                  <img src="assets/modernweb1.png" alt="Generative AI">
+                  <div class="orbit-card-info">
+                    <span>Generative AI</span>
+                  </div>
+                </div>
+                <div class="orbit-card">
+                  <img src="assets/hotel.png" alt="Cloud Neural Net">
+                  <div class="orbit-card-info">
+                    <span>Cloud Neural Net</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-image-glow"></div>
+            <img src="assets/hero.png" alt="annt portrait" class="hero-image">
+          </div>
         </div>
+
+        <div class="hero-right"></div>
+
       </div>
 
-    </div><!-- /.mq-section -->
+      <!-- ══ Premium Dual-Row Infinite Marquee ══ -->
+      <div class="mq-section" id="mqSection">
+
+        <!-- Decorative header label -->
+        <div class="mq-label">
+          <span class="mq-label-line"></span>
+          <span class="mq-label-text">CAPABILITIES</span>
+          <span class="mq-label-line"></span>
+        </div>
+
+        <!-- ROW 1 — moves LEFT (default) -->
+        <div class="mq-row mq-row--left">
+          <div class="mq-track" id="mqTrack1">
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>AI Engineer</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Three.js</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Creative Dev
+            </div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>React</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>WebGL</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Node.js</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>GSAP</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Backend API</div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Python</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Motion Design</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>AI Engineer</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Three.js</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Creative Dev
+            </div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>React</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>WebGL</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Node.js</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>GSAP</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Backend API</div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Python</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Motion Design</div>
+          </div>
+        </div>
+
+        <!-- ROW 2 — moves RIGHT -->
+        <div class="mq-row mq-row--right">
+          <div class="mq-track" id="mqTrack2">
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>TypeScript</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>LLM Agents</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>PostgreSQL</div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>UI / UX</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>REST APIs</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Full Stack</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Docker</div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Next.js</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>CSS Art</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Open AI</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>TypeScript</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>LLM Agents</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>PostgreSQL</div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>UI / UX</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>REST APIs</div>
+            <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Full Stack</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Docker</div>
+            <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Next.js</div>
+            <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>CSS Art</div>
+            <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Open AI</div>
+          </div>
+        </div>
+
+      </div><!-- /.mq-section -->
 
 
 
 
 
 
-  
-  </main>
 
-  <!-- Interactive Hover Image-Reveal Section -->
-  <section class="philosophy-section" id="about" data-scroll-section>
-    <div class="philosophy-container">
-      <p class="philosophy-text">
-        I specialize in crafting 
-        <span class="reveal-word">
-          high-performance web apps
-          <span class="inline-image-wrap">
-            <img src="assets/project1.jpg" alt="Web Apps" class="inline-image">
+    </main>
+
+    <!-- Interactive Hover Image-Reveal Section -->
+    <section class="philosophy-section" id="about" data-scroll-section>
+      <div class="philosophy-container">
+        <p class="philosophy-text">
+          I specialize in crafting
+          <span class="reveal-word">
+            high-performance web apps
+            <span class="inline-image-wrap">
+              <img src="assets/gallary.png" alt="Web Apps" class="inline-image">
+            </span>
           </span>
-        </span> 
-        powered by 
-        <span class="reveal-word">
-          intelligent AI agents
-          <span class="inline-image-wrap">
-            <img src="assets/project2.jpg" alt="AI Agents" class="inline-image">
-          </span>
-        </span>, 
-        immersive 
-        <span class="reveal-word">
-          3D web experiences
-          <span class="inline-image-wrap">
-            <img src="assets/project1.jpg" alt="3D Web" class="inline-image">
-          </span>
-        </span>, 
-        and scalable full-stack architectures.
-      </p>
-    </div>
-  </section>
+          powered by
+          <span class="reveal-word">
+            intelligent AI agents
+            <span class="inline-image-wrap">
+              <img src="assets/modernweb1.png" alt="AI Agents" class="inline-image">
+            </span>
+          </span>,
+          immersive
+          <span class="reveal-word">
+            3D web experiences
+            <span class="inline-image-wrap">
+              <img src="assets/webimage.png" alt="3D Web" class="inline-image">
+            </span>
+          </span>,
+          and scalable full-stack architectures.
+        </p>
+      </div>
+    </section>
 
-  <!-- Projects / Catalogs Section -->
-  <section class="project" id="projects" data-scroll-section>
-    <div class="section-container">
-      <!-- Interactive Catalog Header with 6-Image 3D Popup Showcase -->
-      <div class="catalog-header-wrap" id="catalogHeaderWrap">
-        <h2 class="section-title catalog-title-trigger">
-          <span class="title-text">Project Catalogs</span>
-          <span class="hover-badge">Hover to Preview ✨</span>
-        </h2>
-        
-        <!-- 6 Popup Showcase Images -->
-        <div class="popup-images-fan" id="popupImagesFan">
-          <div class="popup-card card-1">
-            <img src="assets/project_ai.jpg" alt="AI Agent OS">
-            <span class="card-label">AI Agent OS</span>
-          </div>
-          <div class="popup-card card-2">
-            <img src="assets/project_3d.jpg" alt="3D Web Engine">
-            <span class="card-label">3D Web Engine</span>
-          </div>
-          <div class="popup-card card-3">
-            <img src="assets/project_saas.jpg" alt="Fintech SaaS">
-            <span class="card-label">Fintech SaaS</span>
-          </div>
-          <div class="popup-card card-4">
-            <img src="assets/project_creative.jpg" alt="Creative Studio">
-            <span class="card-label">Creative Studio</span>
-          </div>
-          <div class="popup-card card-5">
-            <img src="assets/project_generative.jpg" alt="Generative AI">
-            <span class="card-label">Generative AI</span>
-          </div>
-          <div class="popup-card card-6">
-            <img src="assets/project_cloud.jpg" alt="Cloud Infrastructure">
-            <span class="card-label">Cloud Platform</span>
+    <!-- Projects / Catalogs Section -->
+    <section class="project" id="projects" data-scroll-section>
+      <div class="section-container">
+        <!-- Interactive Catalog Header with 6-Image 3D Popup Showcase -->
+        <div class="catalog-header-wrap" id="catalogHeaderWrap">
+          <h2 class="section-title catalog-title-trigger">
+            <span class="title-text">Project Catalogs</span>
+            <span class="hover-badge">Hover to Preview ✨</span>
+          </h2>
+
+          <!-- 6 Popup Showcase Images -->
+          <div class="popup-images-fan" id="popupImagesFan">
+            <div class="popup-card card-1">
+              <img src="assets/newbert 1.png" alt="AI Agent OS">
+              <span class="card-label">Newbert</span>
+            </div>
+            <div class="popup-card card-2">
+              <img src="assets/gallary2.png" alt="3D Web Engine">
+              <span class="card-label">3D Web Engine</span>
+            </div>
+            <div class="popup-card card-3">
+              <img src="assets/modernweb2.png" alt="Fintech SaaS">
+              <span class="card-label">Fintech SaaS</span>
+            </div>
+            <div class="popup-card card-4">
+              <img src="assets/colocola.png" alt="Creative Studio">
+              <span class="card-label">Creative Studio</span>
+            </div>
+            <div class="popup-card card-5">
+              <img src="assets/gallary.png" alt="Generative AI">
+              <span class="card-label">Generative AI</span>
+            </div>
+            <div class="popup-card card-6">
+              <img src="assets/hotel.png" alt="Cloud Infrastructure">
+              <span class="card-label">Cloud Platform</span>
+            </div>
           </div>
         </div>
-      </div>
-      <p class="section-subtitle">A curated collection of 4 flagship digital products, 3D experiences, and AI platforms.</p>
-      
-      <!-- 5 Interactive Project Showcase Rows with Expandable Media Drawers -->
-      <div class="project-list-container" id="projectListContainer">
-        
-        <!-- Project Row 1 -->
-        <div class="project-row" data-bg="#0f141c">
-          <div class="project-row-header">
-            <div class="project-col-left">
-              <h3 class="project-row-title">Heimdall Power</h3>
-              <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
-            </div>
-            <div class="project-col-center">
-              <p class="project-row-desc">Blending Scandinavian design, 3D visuals, and subtle interactions to showcase Heimdall Power energy tech.</p>
-            </div>
-            <div class="project-col-right">
-              <div class="project-row-tags">
-                <span>3D ANIMATIONS</span>
-                <span>BRANDING</span>
-                <span>CREATIVE DEVELOPMENT</span>
-                <span>WEB DESIGN</span>
+        <p class="section-subtitle">A curated collection of 4 flagship digital products, 3D experiences, and AI
+          platforms.</p>
+
+        <!-- 5 Interactive Project Showcase Rows with Expandable Media Drawers -->
+        <div class="project-list-container" id="projectListContainer">
+
+          <!-- Project Row 1 -->
+          <div class="project-row" data-bg="#0f141c">
+            <div class="project-row-header">
+              <div class="project-col-left">
+                <h3 class="project-row-title">Newbert</h3>
+                <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
               </div>
-              <span class="project-row-location">NORWAY</span>
+              <div class="project-col-center">
+                <p class="project-row-desc">Newbert is an AI-powered platform designed to help college students track
+                  their placement journey.</p>
+              </div>
+              <div class="project-col-right">
+                <div class="project-row-tags">
+                  <span>Startup Ai based</span>
+                  <span>BRANDING</span>
+                  <span>Helping Student</span>
+                  <span>WEB DESIGN</span>
+                </div>
+                <span class="project-row-location">India</span>
+              </div>
             </div>
-          </div>
-          
-          <div class="project-row-drawer">
-            <div class="drawer-content">
-              <div class="media-box video-box">
-                <img src="assets/QRUB.gif" alt="Heimdall Power Video Preview" class="media-img">
-                <div class="video-play-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  <span>LIVE DEMO</span>
+
+            <div class="project-row-drawer">
+              <div class="drawer-content">
+                <div class="media-box video-box">
+                  <video muted loop playsinline preload="metadata" src="/assets/newbert video.mp4"></video>
+
+                  <div class="video-play-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>LIVE DEMO</span>
+                  </div>
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/newbert 1.png" alt="Newbert Screen 1" class="media-img">
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/newbert 2.png" alt="Newbert Screen 2" class="media-img">
                 </div>
               </div>
-              <div class="media-box image-box">
-                <img src="assets/project_ai.jpg" alt="Heimdall Screen 1" class="media-img">
-              </div>
-              <div class="media-box image-box">
-                <img src="assets/project_generative.jpg" alt="Heimdall Screen 2" class="media-img">
-              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Project Row 2 -->
-        <div class="project-row" data-bg="#0a1128">
-          <div class="project-row-header">
-            <div class="project-col-left">
-              <h3 class="project-row-title">Space Capital</h3>
-              <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
-            </div>
-            <div class="project-col-center">
-              <p class="project-row-desc">Repositioned the brand and built the website for Space Capital, the operator-investors who literally wrote the playbook for the space economy.</p>
-            </div>
-            <div class="project-col-right">
-              <div class="project-row-tags">
-                <span>3D ANIMATIONS</span>
-                <span>BRANDING</span>
-                <span>CREATIVE DEVELOPMENT</span>
-                <span>STRATEGY</span>
-                <span>WEB DESIGN</span>
+          <!-- Project Row 2 -->
+          <div class="project-row" data-bg="#0a1128">
+            <div class="project-row-header">
+              <div class="project-col-left">
+                <h3 class="project-row-title">Space Capital</h3>
+                <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
               </div>
-              <span class="project-row-location">NEW YORK</span>
+              <div class="project-col-center">
+                <p class="project-row-desc">Repositioned the brand and built the website for Space Capital, the
+                  operator-investors who literally wrote the playbook for the space economy.</p>
+              </div>
+              <div class="project-col-right">
+                <div class="project-row-tags">
+                  <span>3D ANIMATIONS</span>
+                  <span>BRANDING</span>
+                  <span>CREATIVE DEVELOPMENT</span>
+                  <span>STRATEGY</span>
+                  <span>WEB DESIGN</span>
+                </div>
+                <span class="project-row-location">NEW YORK</span>
+              </div>
             </div>
-          </div>
-          
-          <div class="project-row-drawer">
-            <div class="drawer-content">
-              <div class="media-box video-box">
-                <img src="assets/project_3d.jpg" alt="Space Capital Video Preview" class="media-img">
-                <div class="video-play-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  <span>3D SHOWCASE</span>
+
+            <div class="project-row-drawer">
+              <div class="drawer-content">
+                <div class="media-box video-box">
+                  <img src="assets/project_3d.jpg" alt="Space Capital Video Preview" class="media-img">
+                  <div class="video-play-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>3D SHOWCASE</span>
+                  </div>
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project_creative.jpg" alt="Space Capital Screen 1" class="media-img">
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project_cloud.jpg" alt="Space Capital Screen 2" class="media-img">
                 </div>
               </div>
-              <div class="media-box image-box">
-                <img src="assets/project_creative.jpg" alt="Space Capital Screen 1" class="media-img">
-              </div>
-              <div class="media-box image-box">
-                <img src="assets/project_cloud.jpg" alt="Space Capital Screen 2" class="media-img">
-              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Project Row 3 -->
-        <div class="project-row" data-bg="#16130d">
-          <div class="project-row-header">
-            <div class="project-col-left">
-              <h3 class="project-row-title">Apex Financials</h3>
-              <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
-            </div>
-            <div class="project-col-center">
-              <p class="project-row-desc">High-frequency data analytics dashboard with predictive AI models and real-time portfolio intelligence for global fintech leaders.</p>
-            </div>
-            <div class="project-col-right">
-              <div class="project-row-tags">
-                <span>FINTECH</span>
-                <span>SAAS PLATFORM</span>
-                <span>WEB DESIGN</span>
-                <span>DATA VISUALIZATION</span>
+          <!-- Project Row 3 -->
+          <div class="project-row" data-bg="#16130d">
+            <div class="project-row-header">
+              <div class="project-col-left">
+                <h3 class="project-row-title">Apex Financials</h3>
+                <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
               </div>
-              <span class="project-row-location">LONDON</span>
+              <div class="project-col-center">
+                <p class="project-row-desc">High-frequency data analytics dashboard with predictive AI models and
+                  real-time portfolio intelligence for global fintech leaders.</p>
+              </div>
+              <div class="project-col-right">
+                <div class="project-row-tags">
+                  <span>FINTECH</span>
+                  <span>SAAS PLATFORM</span>
+                  <span>WEB DESIGN</span>
+                  <span>DATA VISUALIZATION</span>
+                </div>
+                <span class="project-row-location">LONDON</span>
+              </div>
             </div>
-          </div>
-          
-          <div class="project-row-drawer">
-            <div class="drawer-content">
-              <div class="media-box video-box">
-                <img src="assets/project_saas.jpg" alt="Apex Financials Video Preview" class="media-img">
-                <div class="video-play-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  <span>ANALYTICS ENGINE</span>
+
+            <div class="project-row-drawer">
+              <div class="drawer-content">
+                <div class="media-box video-box">
+                  <img src="assets/project_saas.jpg" alt="Apex Financials Video Preview" class="media-img">
+                  <div class="video-play-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>ANALYTICS ENGINE</span>
+                  </div>
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project1.jpg" alt="Apex Screen 1" class="media-img">
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project2.jpg" alt="Apex Screen 2" class="media-img">
                 </div>
               </div>
-              <div class="media-box image-box">
-                <img src="assets/project1.jpg" alt="Apex Screen 1" class="media-img">
-              </div>
-              <div class="media-box image-box">
-                <img src="assets/project2.jpg" alt="Apex Screen 2" class="media-img">
-              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Project Row 4 -->
-        <div class="project-row" data-bg="#8c2d00">
-          <div class="project-row-header">
-            <div class="project-col-left">
-              <h3 class="project-row-title">Meridian</h3>
-              <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
-            </div>
-            <div class="project-col-center">
-              <p class="project-row-desc">AEO tool to see what AI is saying about your brand, discover improvement opportunities, and take action before anyone else.</p>
-            </div>
-            <div class="project-col-right">
-              <div class="project-row-tags">
-                <span>BRANDING</span>
-                <span>WEB DESIGN</span>
-                <span>WEBFLOW DEVELOPMENT</span>
-                <span>STRATEGY</span>
+          <!-- Project Row 4 -->
+          <div class="project-row" data-bg="#8c2d00">
+            <div class="project-row-header">
+              <div class="project-col-left">
+                <h3 class="project-row-title">Meridian</h3>
+                <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
               </div>
-              <span class="project-row-location">SAN FRANCISCO</span>
+              <div class="project-col-center">
+                <p class="project-row-desc">AEO tool to see what AI is saying about your brand, discover improvement
+                  opportunities, and take action before anyone else.</p>
+              </div>
+              <div class="project-col-right">
+                <div class="project-row-tags">
+                  <span>BRANDING</span>
+                  <span>WEB DESIGN</span>
+                  <span>WEBFLOW DEVELOPMENT</span>
+                  <span>STRATEGY</span>
+                </div>
+                <span class="project-row-location">SAN FRANCISCO</span>
+              </div>
             </div>
-          </div>
-          
-          <div class="project-row-drawer">
-            <div class="drawer-content">
-              <div class="media-box video-box">
-                <img src="assets/project_creative.jpg" alt="Meridian Video Preview" class="media-img">
-                <div class="video-play-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  <span>AEO TOOL DEMO</span>
+
+            <div class="project-row-drawer">
+              <div class="drawer-content">
+                <div class="media-box video-box">
+                  <img src="assets/project_creative.jpg" alt="Meridian Video Preview" class="media-img">
+                  <div class="video-play-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>AEO TOOL DEMO</span>
+                  </div>
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project_generative.jpg" alt="Meridian Screen 1" class="media-img">
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project_ai.jpg" alt="Meridian Screen 2" class="media-img">
                 </div>
               </div>
-              <div class="media-box image-box">
-                <img src="assets/project_generative.jpg" alt="Meridian Screen 1" class="media-img">
-              </div>
-              <div class="media-box image-box">
-                <img src="assets/project_ai.jpg" alt="Meridian Screen 2" class="media-img">
-              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Project Row 5 -->
-        <div class="project-row" data-bg="#120e24">
-          <div class="project-row-header">
-            <div class="project-col-left">
-              <h3 class="project-row-title">Cloud Neural Net</h3>
-              <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
-            </div>
-            <div class="project-col-center">
-              <p class="project-row-desc">Scalable cloud infrastructure with real-time neural network graph rendering, edge compute monitoring, and automated multi-region deployment.</p>
-            </div>
-            <div class="project-col-right">
-              <div class="project-row-tags">
-                <span>CLOUD INFRASTRUCTURE</span>
-                <span>NEURAL NETWORKS</span>
-                <span>SYSTEM ARCHITECTURE</span>
-                <span>WEB DESIGN</span>
+          <!-- Project Row 5 -->
+          <div class="project-row" data-bg="#120e24">
+            <div class="project-row-header">
+              <div class="project-col-left">
+                <h3 class="project-row-title">Cloud Neural Net</h3>
+                <a href="#contact" class="case-study-link">View Case Study &rarr;</a>
               </div>
-              <span class="project-row-location">TOKYO</span>
+              <div class="project-col-center">
+                <p class="project-row-desc">Scalable cloud infrastructure with real-time neural network graph rendering,
+                  edge compute monitoring, and automated multi-region deployment.</p>
+              </div>
+              <div class="project-col-right">
+                <div class="project-row-tags">
+                  <span>CLOUD INFRASTRUCTURE</span>
+                  <span>NEURAL NETWORKS</span>
+                  <span>SYSTEM ARCHITECTURE</span>
+                  <span>WEB DESIGN</span>
+                </div>
+                <span class="project-row-location">TOKYO</span>
+              </div>
             </div>
-          </div>
-          
-          <div class="project-row-drawer">
-            <div class="drawer-content">
-              <div class="media-box video-box">
-                <img src="assets/project_cloud.jpg" alt="Cloud Net Video Preview" class="media-img">
-                <div class="video-play-badge">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                  <span>INFRASTRUCTURE DEMO</span>
+
+            <div class="project-row-drawer">
+              <div class="drawer-content">
+                <div class="media-box video-box">
+                  <img src="assets/project_cloud.jpg" alt="Cloud Net Video Preview" class="media-img">
+                  <div class="video-play-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                    <span>INFRASTRUCTURE DEMO</span>
+                  </div>
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project_3d.jpg" alt="Cloud Net Screen 1" class="media-img">
+                </div>
+                <div class="media-box image-box">
+                  <img src="assets/project_saas.jpg" alt="Cloud Net Screen 2" class="media-img">
                 </div>
               </div>
-              <div class="media-box image-box">
-                <img src="assets/project_3d.jpg" alt="Cloud Net Screen 1" class="media-img">
-              </div>
-              <div class="media-box image-box">
-                <img src="assets/project_saas.jpg" alt="Cloud Net Screen 2" class="media-img">
-              </div>
             </div>
           </div>
+
         </div>
 
-      </div>
-
-      <!-- Chunky & Crisp "See More Projects" CTA -->
-      <div class="project-more-wrap">
-        <a href="#contact" class="btn-chunky">
-          <span>See More Projects</span>
-          <svg width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Section with Proximity 3D Tech Icon Pop -->
-  <section class="skills" id="skills" data-scroll-section>
-    <div class="section-container">
-      
-      <!-- Interactive Heading Container -->
-      <div class="skills-heading-container" id="skillsHeadingContainer">
-        <span class="skills-eyebrow">Expertise & Stack</span>
-        <h2 class="skills-main-title" id="skillsMainTitle">
-          <span class="skill-letter" data-index="0">T</span>
-          <span class="skill-letter" data-index="1">E</span>
-          <span class="skill-letter" data-index="2">C</span>
-          <span class="skill-letter" data-index="3">H</span>
-          <span class="skill-letter" data-index="4">N</span>
-          <span class="skill-letter" data-index="5">I</span>
-          <span class="skill-letter" data-index="6">C</span>
-          <span class="skill-letter" data-index="7">A</span>
-          <span class="skill-letter" data-index="8">L</span>
-        </h2>
-        <p class="section-subtitle">Hover across the title to reveal interactive 3D technology icons.</p>
-
-        <!-- Proximity Floating Tech Icons Array (Transparent BG) -->
-        <div class="tech-icons-field" id="techIconsField">
-          <!-- Icon 1: JS -->
-          <div class="tech-icon-pop" data-target-index="0" style="--default-x: -360px; --default-y: -75px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span class="icon-tag">JavaScript</span>
-          </div>
-
-          <!-- Icon 2: TS -->
-          <div class="tech-icon-pop" data-target-index="1" style="--default-x: -270px; --default-y: -105px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16.5 9.4 7.55 4.24a1.8 1.8 0 0 0-1.8 0l-1.9 1.1a1.8 1.8 0 0 0 0 3.11l8.95 5.16a1.8 1.8 0 0 0 1.8 0l1.9-1.1a1.8 1.8 0 0 0 0-3.11z"/><path d="m3.85 8.45 8.95 5.16a1.8 1.8 0 0 0 1.8 0l1.9-1.1a1.8 1.8 0 0 0 0-3.11L7.55 4.24"/></svg>
-            <span class="icon-tag">TypeScript</span>
-          </div>
-
-          <!-- Icon 3: React -->
-          <div class="tech-icon-pop" data-target-index="2" style="--default-x: -180px; --default-y: -125px;">
-            <svg class="tech-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6"><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(0 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)"/><ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)"/><circle cx="50" cy="50" r="7" fill="currentColor"/></svg>
-            <span class="icon-tag">React.js</span>
-          </div>
-
-          <!-- Icon 4: Three.js -->
-          <div class="tech-icon-pop" data-target-index="3" style="--default-x: -90px; --default-y: -135px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            <span class="icon-tag">Three.js / WebGL</span>
-          </div>
-
-          <!-- Icon 5: Python -->
-          <div class="tech-icon-pop" data-target-index="4" style="--default-x: 0px; --default-y: -140px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 6 4 6 6v4h6v2H4c-2 0-4 .48-4 6s2 6 6 6h2v-4c0-2 1.5-4 4-4h4v-4c0-4-3.5-6-6-6zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/><path d="M12 22c5.52 0 6-2 6-4v-4h-6v-2h8c2 0 4-.48 4-6s-2-6-6-6h-2v4c0 2-1.5 4-4 4h-4v4c0 4 3.5 6 6 6zm2-5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-            <span class="icon-tag">Python AI</span>
-          </div>
-
-          <!-- Icon 6: Node.js -->
-          <div class="tech-icon-pop" data-target-index="5" style="--default-x: 90px; --default-y: -135px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2z"/><path d="M12 12l10-5.5M12 12v10M12 12L2 6.5"/></svg>
-            <span class="icon-tag">Node.js</span>
-          </div>
-
-          <!-- Icon 7: GSAP -->
-          <div class="tech-icon-pop" data-target-index="6" style="--default-x: 180px; --default-y: -125px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg>
-            <span class="icon-tag">GSAP 3</span>
-          </div>
-
-          <!-- Icon 8: Next.js -->
-          <div class="tech-icon-pop" data-target-index="7" style="--default-x: 270px; --default-y: -105px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 16V8l8 9V8"/></svg>
-            <span class="icon-tag">Next.js</span>
-          </div>
-
-          <!-- Icon 9: Figma -->
-          <div class="tech-icon-pop" data-target-index="8" style="--default-x: 360px; --default-y: -75px;">
-            <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12a3.5 3.5 0 0 1 0 7H8.5A3.5 3.5 0 0 1 5 5.5z"/><path d="M12 9a3.5 3.5 0 1 1 0 7h-3.5V9H12z"/><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v3.5a3.5 3.5 0 1 1-7 0z"/><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z"/></svg>
-            <span class="icon-tag">Figma UI</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Frontend & Motion</h3>
-          <ul class="skill-tags">
-            <li>JavaScript (ES6+)</li>
-            <li>TypeScript</li>
-            <li>React / Next.js</li>
-            <li>GSAP 3 / ScrollTrigger</li>
-            <li>Three.js / WebGL</li>
-            <li>Tailwind CSS / Vanilla CSS</li>
-          </ul>
-        </div>
-
-        <div class="skill-category">
-          <h3>AI & Architecture</h3>
-          <ul class="skill-tags">
-            <li>Python / LangChain</li>
-            <li>Gemini / OpenAI API</li>
-            <li>Node.js / Express</li>
-            <li>Vector DBs / Pinecone</li>
-            <li>REST & GraphQL APIs</li>
-            <li>Docker & CI/CD</li>
-          </ul>
-        </div>
-
-        <div class="skill-category">
-          <h3>Design & Strategy</h3>
-          <ul class="skill-tags">
-            <li>UI/UX Architecture</li>
-            <li>Figma / Prototyping</li>
-            <li>Design Systems</li>
-            <li>Performance Tuning</li>
-            <li>Core Web Vitals</li>
-            <li>Brand Identity</li>
-          </ul>
-        </div>
-
-        <div class="skill-category">
-          <h3>Backend & DevOps Tools</h3>
-          <ul class="skill-tags">
-            <li>Node.js / Express</li>
-            <li>Python / FastAPI</li>
-            <li>PostgreSQL / MongoDB</li>
-            <li>Docker / Kubernetes</li>
-            <li>AWS / GCP Cloud Services</li>
-            <li>CI/CD & GitHub Actions</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Achievements Section -->
-  <section class="achievment" id="awards" data-scroll-section>
-    <div class="section-container">
-      
-      <!-- Interactive 3D Shader Title Container -->
-      <div class="achievement-heading-container" id="achievementHeadingContainer">
-        <span class="achievement-eyebrow">Recognition & Milestones</span>
-        <h2 class="achievement-main-title" id="achievementMainTitle">
-          <span class="achieve-char" style="--i:0">A</span>
-          <span class="achieve-char" style="--i:1">C</span>
-          <span class="achieve-char" style="--i:2">H</span>
-          <span class="achieve-char" style="--i:3">I</span>
-          <span class="achieve-char" style="--i:4">E</span>
-          <span class="achieve-char" style="--i:5">V</span>
-          <span class="achieve-char" style="--i:6">E</span>
-          <span class="achieve-char" style="--i:7">M</span>
-          <span class="achieve-char" style="--i:8">E</span>
-          <span class="achieve-char" style="--i:9">N</span>
-          <span class="achieve-char" style="--i:10">T</span>
-          <span class="achieve-char" style="--i:11">S</span>
-        </h2>
-        <p class="section-subtitle">Recognition, hackathon wins, and professional accomplishments.</p>
-      </div>
-
-      <!-- Standalone Flagship LeetCode Achievement Card -->
-      <div class="leetcode-single-showcase">
-        <div class="leetcode-card-inner">
-          <div class="leetcode-badge-wrap">
-            <span class="leetcode-hero-num">250+</span>
-            <span class="leetcode-hero-label">PROBLEMS SOLVED</span>
-          </div>
-          
-          <div class="leetcode-card-content">
-            <div class="leetcode-tag">⚡ Competitive Programming & DSA</div>
-            <h3>250+ LeetCode Questions Solved</h3>
-            <p>Demonstrated mastery across complex Data Structures & Algorithms, including Dynamic Programming, Graph Theory, Trees, Greedy Approaches, and High-Performance System Logic Optimization.</p>
-            
-            <div class="leetcode-topics-pills">
-              <span>Dynamic Programming</span>
-              <span>Graph Theory</span>
-              <span>Binary Trees</span>
-              <span>Sliding Window</span>
-              <span>Two Pointers</span>
-              <span>Backtracking</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer Section -->
-  <footer class="footer" id="contact" data-scroll-section>
-    <div class="footer-container">
-      <!-- Interactive Matter.js Physics Container -->
-      <div class="footer-cta" id="footerCtaContainer">
-        <!-- Physics Canvas World Layer -->
-        <div class="physics-world-layer" id="physicsWorldLayer"></div>
-
-        <!-- Centered Text & Button Layer (Always Above Physics Objects) -->
-        <div class="footer-cta-content">
-          <h2 class="footer-cta-title">Let's build something extraordinary together.</h2>
-          <a href="mailto:contact@alokkumar.dev" class="btn-fill">
-            <span>Get in Touch</span>
+        <!-- Chunky & Crisp "See More Projects" CTA -->
+        <div class="project-more-wrap">
+          <a href="#contact" class="btn-chunky">
+            <span>See More Projects</span>
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
           </a>
         </div>
       </div>
+    </section>
 
-      <!-- 3D Folding Shader Headline — Annt k -->
-      <div class="footer-hero-name-wrap" id="footerHeroNameWrap">
-        <h1 class="footer-hero-name" id="footerHeroName">
-          <span class="fold-char" style="--i:0">A</span>
-          <span class="fold-char" style="--i:1">n</span>
-          <span class="fold-char" style="--i:2">n</span>
-          <span class="fold-char" style="--i:3">t</span>
-          <span class="fold-char space-char">&nbsp;</span>
-          <span class="fold-char" style="--i:4">k</span>
-        </h1>
-      </div>
+    <!-- Skills Section with Proximity 3D Tech Icon Pop -->
+    <section class="skills" id="skills" data-scroll-section>
+      <div class="section-container">
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 Annt k. All rights reserved.</p>
-        <div class="footer-socials">
-          <a href="#">GitHub</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Twitter</a>
+        <!-- Interactive Heading Container -->
+        <div class="skills-heading-container" id="skillsHeadingContainer">
+          <span class="skills-eyebrow">Expertise & Stack</span>
+          <h2 class="skills-main-title" id="skillsMainTitle">
+            <span class="skill-letter" data-index="0">T</span>
+            <span class="skill-letter" data-index="1">E</span>
+            <span class="skill-letter" data-index="2">C</span>
+            <span class="skill-letter" data-index="3">H</span>
+            <span class="skill-letter" data-index="4">N</span>
+            <span class="skill-letter" data-index="5">I</span>
+            <span class="skill-letter" data-index="6">C</span>
+            <span class="skill-letter" data-index="7">A</span>
+            <span class="skill-letter" data-index="8">L</span>
+          </h2>
+          <p class="section-subtitle">Hover across the title to reveal interactive 3D technology icons.</p>
+
+          <!-- Proximity Floating Tech Icons Array (Transparent BG) -->
+          <div class="tech-icons-field" id="techIconsField">
+            <!-- Icon 1: JS -->
+            <div class="tech-icon-pop" data-target-index="0" style="--default-x: -360px; --default-y: -75px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+              <span class="icon-tag">JavaScript</span>
+            </div>
+
+            <!-- Icon 2: TS -->
+            <div class="tech-icon-pop" data-target-index="1" style="--default-x: -270px; --default-y: -105px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M16.5 9.4 7.55 4.24a1.8 1.8 0 0 0-1.8 0l-1.9 1.1a1.8 1.8 0 0 0 0 3.11l8.95 5.16a1.8 1.8 0 0 0 1.8 0l1.9-1.1a1.8 1.8 0 0 0 0-3.11z" />
+                <path d="m3.85 8.45 8.95 5.16a1.8 1.8 0 0 0 1.8 0l1.9-1.1a1.8 1.8 0 0 0 0-3.11L7.55 4.24" />
+              </svg>
+              <span class="icon-tag">TypeScript</span>
+            </div>
+
+            <!-- Icon 3: React -->
+            <div class="tech-icon-pop" data-target-index="2" style="--default-x: -180px; --default-y: -125px;">
+              <svg class="tech-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6">
+                <ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(0 50 50)" />
+                <ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(60 50 50)" />
+                <ellipse cx="50" cy="50" rx="42" ry="16" transform="rotate(120 50 50)" />
+                <circle cx="50" cy="50" r="7" fill="currentColor" />
+              </svg>
+              <span class="icon-tag">React.js</span>
+            </div>
+
+            <!-- Icon 4: Three.js -->
+            <div class="tech-icon-pop" data-target-index="3" style="--default-x: -90px; --default-y: -135px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
+              </svg>
+              <span class="icon-tag">Three.js / WebGL</span>
+            </div>
+
+            <!-- Icon 5: Python -->
+            <div class="tech-icon-pop" data-target-index="4" style="--default-x: 0px; --default-y: -140px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M12 2C6.48 2 6 4 6 6v4h6v2H4c-2 0-4 .48-4 6s2 6 6 6h2v-4c0-2 1.5-4 4-4h4v-4c0-4-3.5-6-6-6zm-2 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                <path
+                  d="M12 22c5.52 0 6-2 6-4v-4h-6v-2h8c2 0 4-.48 4-6s-2-6-6-6h-2v4c0 2-1.5 4-4 4h-4v4c0 4 3.5 6 6 6zm2-5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+              </svg>
+              <span class="icon-tag">Python AI</span>
+            </div>
+
+            <!-- Icon 6: Node.js -->
+            <div class="tech-icon-pop" data-target-index="5" style="--default-x: 90px; --default-y: -135px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2z" />
+                <path d="M12 12l10-5.5M12 12v10M12 12L2 6.5" />
+              </svg>
+              <span class="icon-tag">Node.js</span>
+            </div>
+
+            <!-- Icon 7: GSAP -->
+            <div class="tech-icon-pop" data-target-index="6" style="--default-x: 180px; --default-y: -125px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v10M7 12h10" />
+              </svg>
+              <span class="icon-tag">GSAP 3</span>
+            </div>
+
+            <!-- Icon 8: Next.js -->
+            <div class="tech-icon-pop" data-target-index="7" style="--default-x: 270px; --default-y: -105px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M8 16V8l8 9V8" />
+              </svg>
+              <span class="icon-tag">Next.js</span>
+            </div>
+
+            <!-- Icon 9: Figma -->
+            <div class="tech-icon-pop" data-target-index="8" style="--default-x: 360px; --default-y: -75px;">
+              <svg class="tech-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12a3.5 3.5 0 0 1 0 7H8.5A3.5 3.5 0 0 1 5 5.5z" />
+                <path d="M12 9a3.5 3.5 0 1 1 0 7h-3.5V9H12z" />
+                <path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v3.5a3.5 3.5 0 1 1-7 0z" />
+                <path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" />
+              </svg>
+              <span class="icon-tag">Figma UI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Frontend & Motion</h3>
+            <ul class="skill-tags">
+              <li>JavaScript (ES6+)</li>
+              <li>TypeScript</li>
+              <li>React / Next.js</li>
+              <li>GSAP 3 / ScrollTrigger</li>
+              <li>Three.js / WebGL</li>
+              <li>Tailwind CSS / Vanilla CSS</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>AI & Architecture</h3>
+            <ul class="skill-tags">
+              <li>Python / LangChain</li>
+              <li>Gemini / OpenAI API</li>
+              <li>Node.js / Express</li>
+              <li>Vector DBs / Pinecone</li>
+              <li>REST & GraphQL APIs</li>
+              <li>Docker & CI/CD</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>Design & Strategy</h3>
+            <ul class="skill-tags">
+              <li>UI/UX Architecture</li>
+              <li>Figma / Prototyping</li>
+              <li>Design Systems</li>
+              <li>Performance Tuning</li>
+              <li>Core Web Vitals</li>
+              <li>Brand Identity</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <h3>Backend & DevOps Tools</h3>
+            <ul class="skill-tags">
+              <li>Node.js / Express</li>
+              <li>Python / FastAPI</li>
+              <li>PostgreSQL / MongoDB</li>
+              <li>Docker / Kubernetes</li>
+              <li>AWS / GCP Cloud Services</li>
+              <li>CI/CD & GitHub Actions</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="achievment" id="awards" data-scroll-section>
+      <div class="section-container">
+
+        <!-- Interactive 3D Shader Title Container -->
+        <div class="achievement-heading-container" id="achievementHeadingContainer">
+          <span class="achievement-eyebrow">Recognition & Milestones</span>
+          <h2 class="achievement-main-title" id="achievementMainTitle">
+            <span class="achieve-char" style="--i:0">A</span>
+            <span class="achieve-char" style="--i:1">C</span>
+            <span class="achieve-char" style="--i:2">H</span>
+            <span class="achieve-char" style="--i:3">I</span>
+            <span class="achieve-char" style="--i:4">E</span>
+            <span class="achieve-char" style="--i:5">V</span>
+            <span class="achieve-char" style="--i:6">E</span>
+            <span class="achieve-char" style="--i:7">M</span>
+            <span class="achieve-char" style="--i:8">E</span>
+            <span class="achieve-char" style="--i:9">N</span>
+            <span class="achieve-char" style="--i:10">T</span>
+            <span class="achieve-char" style="--i:11">S</span>
+          </h2>
+          <p class="section-subtitle">Recognition, hackathon wins, and professional accomplishments.</p>
+        </div>
+
+        <!-- Standalone Flagship LeetCode Achievement Card -->
+        <div class="leetcode-single-showcase">
+          <div class="leetcode-card-inner">
+            <div class="leetcode-badge-wrap">
+              <span class="leetcode-hero-num">250+</span>
+              <span class="leetcode-hero-label">PROBLEMS SOLVED</span>
+            </div>
+
+            <div class="leetcode-card-content">
+              <div class="leetcode-tag">⚡ Competitive Programming & DSA</div>
+              <h3>250+ LeetCode Questions Solved</h3>
+              <p>Demonstrated mastery across complex Data Structures & Algorithms, including Dynamic Programming, Graph
+                Theory, Trees, Greedy Approaches, and High-Performance System Logic Optimization.</p>
+
+              <div class="leetcode-topics-pills">
+                <span>Dynamic Programming</span>
+                <span>Graph Theory</span>
+                <span>Binary Trees</span>
+                <span>Sliding Window</span>
+                <span>Two Pointers</span>
+                <span>Backtracking</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer" id="contact" data-scroll-section>
+      <div class="footer-container">
+        <!-- Interactive Matter.js Physics Container -->
+        <div class="footer-cta" id="footerCtaContainer">
+          <!-- Physics Canvas World Layer -->
+          <div class="physics-world-layer" id="physicsWorldLayer"></div>
+
+          <!-- Centered Text & Button Layer (Always Above Physics Objects) -->
+          <div class="footer-cta-content">
+            <h2 class="footer-cta-title">Let's build something extraordinary together.</h2>
+            <a href="mailto:contact@alokkumar.dev" class="btn-fill">
+              <span>Get in Touch</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 3D Folding Shader Headline — Annt k -->
+        <div class="footer-hero-name-wrap" id="footerHeroNameWrap">
+          <h1 class="footer-hero-name" id="footerHeroName">
+            <span class="fold-char" style="--i:0">A</span>
+            <span class="fold-char" style="--i:1">n</span>
+            <span class="fold-char" style="--i:2">n</span>
+            <span class="fold-char" style="--i:3">t</span>
+            <span class="fold-char space-char">&nbsp;</span>
+            <span class="fold-char" style="--i:4">k</span>
+          </h1>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Annt k. All rights reserved.</p>
+          <div class="footer-socials">
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Twitter</a>
+          </div>
+        </div>
+      </div>
+    </footer>
 
 
-</div>
+  </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
-<script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+  <script src="script.js"></script>
 </body>
+
 </html>
