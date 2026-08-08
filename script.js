@@ -34,20 +34,8 @@ try {
   console.warn('LocomotiveScroll disabled fallback:', e);
 }
 
-/* ---------- Preloader ---------- */
-function hidePreloader() {
-  const preloader = document.getElementById('preloader');
-  if (preloader) preloader.style.display = 'none';
-  if (locoScroll) locoScroll.update();
-  if (window.heroTl) heroTl.play();
-}
 
-const preloaderTl = gsap.timeline({ onComplete: hidePreloader });
-preloaderTl.to('.preloader-text', { opacity: 0.3, repeat: 2, yoyo: true, duration: 0.3 })
-           .to('#preloader', { yPercent: -100, duration: 0.7, ease: 'power4.inOut' });
 
-// Safety timeout for preloader
-setTimeout(hidePreloader, 1000);
 
 /* ---------- Hero entrance timeline ---------- */
 const heroTl = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
@@ -1137,143 +1125,385 @@ function initAITerminalShowcase() {
    - Infinite 3D physical object conveyor belt
    - Realistic projected ground shadow, card tilt & specular glow
    - Interactive camera perspective stage tilt
-   - GSAP timeline animation with smooth speed scaling
+
+
+/* ============================================================
+   NEW CINEMATIC 3D STUDIO-IDENT PRELOADER
+   DARKNESS → 3D DIGITAL SPACE → PROJECT UNIVERSE → CONVERGENCE
+   → BLACKOUT → ANANT K REVEAL → LOCK → WEBSITE
    ============================================================ */
-function initTesla3DBeltMarquee() {
-  const section = document.getElementById('beltMarqueeSection');
-  const track = document.getElementById('beltTrack');
-  const canvas = document.getElementById('beltBgCanvas');
-  const glow = section ? section.querySelector('.belt-radial-glow') : null;
-  if (!section || !track) return;
+function initCinematic3DPreloader() {
+  const pl         = document.getElementById('pl');
+  const main       = document.getElementById('main');
+  const navbar     = document.getElementById('navbar');
+  const plWorld    = document.getElementById('plWorld');
+  const plIdentity = document.getElementById('plIdentity');
+  const plScanline = document.getElementById('plScanline');
+  const plLogoSvg  = document.getElementById('plLogoSvg');
+  const plClipRect = document.getElementById('plClipRect');
+  const plSweepRect= document.getElementById('plSweepRect');
+  const plTagline  = document.getElementById('plTagline');
+  const plCanvas   = document.getElementById('plCanvas');
+  const plShaft    = document.getElementById('plShaft');
+  const panels     = pl ? pl.querySelectorAll('.pl-panel') : [];
 
-  // 1. Background Particles Canvas
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let w = (canvas.width = section.clientWidth);
-    let h = (canvas.height = section.clientHeight);
+  if (!pl || !main) return;
 
-    window.addEventListener('resize', () => {
-      if (canvas && section) {
-        w = canvas.width = section.clientWidth;
-        h = canvas.height = section.clientHeight;
-      }
-    });
-
-    const particles = [];
-    for (let i = 0; i < 25; i++) {
-      particles.push({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.6 + 0.6,
-        alpha: Math.random() * 0.45 + 0.2
-      });
-    }
-
-    function renderBg() {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > w) p.vx *= -1;
-        if (p.y < 0 || p.y > h) p.vy *= -1;
-
-        ctx.fillStyle = `rgba(240, 200, 118, ${p.alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(renderBg);
-    }
-    renderBg();
+  /* ── Accessibility: reduced motion ──────────────────── */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    pl.style.display = 'none';
+    gsap.set(main,   { opacity: 1 });
+    gsap.set(navbar, { opacity: 1 });
+    return;
   }
 
-  // 2. Continuous Infinite GSAP Conveyor Belt Timeline
-  const beltTween = gsap.to(track, {
-    x: '-50%',
-    duration: 30,
-    ease: 'none',
-    repeat: -1
+  /* ── 1. INITIAL STATE ────────────────────────────────── */
+  document.body.style.overflow = 'hidden';
+  gsap.set(main,       { opacity: 0 });
+  gsap.set(navbar,     { opacity: 0 });
+  gsap.set(plIdentity, { opacity: 0 });
+  gsap.set(plScanline, { opacity: 0, x: '-110%' });
+  gsap.set(plTagline,  { opacity: 0, y: 14 });
+  if (plClipRect) plClipRect.setAttribute('width', '0');
+  if (plSweepRect) plSweepRect.setAttribute('x', '-900');
+
+  /* ── Ambient particle canvas ─────────────────────────── */
+  if (plCanvas) {
+    const ctx = plCanvas.getContext('2d');
+    let cw = plCanvas.width  = window.innerWidth;
+    let ch = plCanvas.height = window.innerHeight;
+    const pts = Array.from({ length: 28 }, () => ({
+      x: Math.random() * cw, y: Math.random() * ch,
+      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.4 + 0.4, a: Math.random() * 0.35 + 0.1
+    }));
+    let rafId;
+    function renderPts() {
+      ctx.clearRect(0, 0, cw, ch);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > cw) p.vx *= -1;
+        if (p.y < 0 || p.y > ch) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(212,160,58,${p.a})`;
+        ctx.fill();
+      });
+      rafId = requestAnimationFrame(renderPts);
+    }
+    renderPts();
+    gsap.to(plCanvas, { opacity: 1, duration: 1.2, delay: 0.4 });
+    /* Cancel RAF after loader exits */
+    pl._cancelParticles = () => cancelAnimationFrame(rafId);
+  }
+
+  /* ── GSAP Panel helper ───────────────────────────────── */
+  // GSAP doesn't natively drive CSS custom props used inside transform strings,
+  // so we animate panels using direct inline transform overrides.
+  function setPanelTransform(el, tx, ty, tz, rx, ry, rz, s, opacity) {
+    gsap.set(el, {
+      opacity: opacity !== undefined ? opacity : gsap.getProperty(el, 'opacity'),
+      x: tx, y: ty, z: tz,
+      rotateX: rx, rotateY: ry, rotateZ: rz, scale: s,
+      transformOrigin: '50% 50%'
+    });
+  }
+
+  /* ── 2. INITIALISE PANEL TRANSFORMS from CSS vars ────── */
+  panels.forEach(panel => {
+    const s  = panel.style;
+    const tx = s.getPropertyValue('--tx') || '0px';
+    const ty = s.getPropertyValue('--ty') || '0px';
+    const tz = s.getPropertyValue('--tz') || '-600px';
+    const rx = s.getPropertyValue('--rx') || '0deg';
+    const ry = s.getPropertyValue('--ry') || '0deg';
+    const rz = s.getPropertyValue('--rz') || '0deg';
+    const sc = parseFloat(s.getPropertyValue('--s') || '1');
+    // Override CSS-variable transform with GSAP-compatible values
+    gsap.set(panel, {
+      clearProps: 'transform',
+      x: tx, y: ty, z: tz,
+      rotateX: rx, rotateY: ry, rotateZ: rz,
+      scale: sc, opacity: 0,
+      transformOrigin: '50% 50%'
+    });
   });
 
-  // Slow down smooth speed on hover
-  section.addEventListener('mouseenter', () => {
-    gsap.to(beltTween, { timeScale: 0.35, duration: 0.6, ease: 'power2.out' });
-  });
+  /* Safety net — always reveal website if anything fails */
+  const safetyTimer = setTimeout(() => {
+    if (pl._cancelParticles) pl._cancelParticles();
+    pl.style.display = 'none';
+    gsap.set(main,   { opacity: 1 });
+    gsap.set(navbar, { opacity: 1 });
+    document.body.style.overflow = '';
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  }, 7500);
 
-  section.addEventListener('mouseleave', () => {
-    gsap.to(beltTween, { timeScale: 1.0, duration: 0.6, ease: 'power2.out' });
-    if (glow) {
-      gsap.to(glow, { x: 0, y: 0, opacity: 0.8, duration: 0.8, ease: 'power2.out' });
+  /* ── Master Timeline ─────────────────────────────────── */
+  const tl = gsap.timeline({
+    defaults: { ease: 'power3.out' },
+    onComplete: () => {
+      clearTimeout(safetyTimer);  // disarm safety net
+      if (pl._cancelParticles) pl._cancelParticles();
+      gsap.to(pl, {
+        opacity: 0, duration: 0.5, ease: 'power2.inOut',
+        onComplete: () => {
+          pl.style.display = 'none';
+          document.body.style.overflow = '';
+          if (window.locoScroll) locoScroll.update();
+          if (window.ScrollTrigger) ScrollTrigger.refresh();
+        }
+      });
     }
   });
 
-  // 3. Interactive Camera Perspective Stage Tilt
-  section.addEventListener('mousemove', (e) => {
-    const rect = section.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+  /* ─────────────────────────────────────────────────────
+     PHASE 1 — DARKNESS (0.0 – 0.4s)
+     Complete black. Nothing moves. Creates anticipation.
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('darkness', 0);
+  tl.to({}, { duration: 0.4 }, 'darkness');           // pure hold
 
-    const rotX = 18 + (y / rect.height) * -8;
-    const rotZ = -1.5 + (x / rect.width) * 4;
+  /* ─────────────────────────────────────────────────────
+     PHASE 2 — ENTER THE DIGITAL SPACE (0.4 – 1.2s)
+     Background panels emerge from deep Z into view.
+     Far → Mid → Fore, staggered.
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('enter', 0.4);
 
-    gsap.to(track, {
-      rotateX: rotX,
-      rotateZ: rotZ,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
+  const bgPanels  = pl.querySelectorAll('.pl-panel--bg');
+  const midPanels = pl.querySelectorAll('.pl-panel--mid');
+  const fgPanels  = pl.querySelectorAll('.pl-panel--fg');
 
-    if (glow) {
-      gsap.to(glow, {
-        x: x * 0.4,
-        y: y * 0.4,
-        opacity: 1,
-        duration: 0.4,
-        ease: 'power2.out'
-      });
-    }
+  tl.to(bgPanels, {
+    opacity: 0.55, duration: 0.7, stagger: 0.12,
+    ease: 'power2.out'
+  }, 'enter');
+
+  tl.to(midPanels, {
+    opacity: 0.72, duration: 0.65, stagger: 0.1,
+    ease: 'power2.out'
+  }, 'enter+=0.25');
+
+  tl.to(fgPanels, {
+    opacity: 0.85, duration: 0.6, stagger: 0.09,
+    ease: 'power2.out'
+  }, 'enter+=0.45');
+
+  /* Subtle shaft of warm light through the space */
+  tl.to(plShaft, { opacity: 1, duration: 0.8, ease: 'power1.inOut' }, 'enter+=0.3');
+
+  /* ─────────────────────────────────────────────────────
+     PHASE 3 — CAMERA TRAVEL THROUGH PROJECT ARCHIVE (1.2 – 2.8s)
+     Simulate camera moving forward:
+     - plWorld z pulls all panels toward viewer
+     - Individual panels drift slowly
+     - Foreground panels pass "past" the camera
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('travel', 1.2);
+
+  /* Camera push-forward — animate plWorld translateZ */
+  tl.to(plWorld, {
+    z: 480, duration: 1.6,
+    ease: 'power1.inOut'
+  }, 'travel');
+
+  /* Slow drift on individual panels — depth parallax */
+  bgPanels.forEach((p, i) => {
+    tl.to(p, {
+      z: `+=${100 + i * 40}`,
+      y: `+=${(i % 2 === 0 ? -1 : 1) * 35}`,
+      duration: 1.6, ease: 'none'
+    }, 'travel');
+  });
+  midPanels.forEach((p, i) => {
+    tl.to(p, {
+      z: `+=${160 + i * 35}`,
+      x: `+=${(i % 2 === 0 ? -1 : 1) * 55}`,
+      rotateY: `+=${(i % 2 === 0 ? -1 : 1) * 4}`,
+      duration: 1.6, ease: 'power1.inOut'
+    }, 'travel+=' + (i * 0.06));
+  });
+  fgPanels.forEach((p, i) => {
+    tl.to(p, {
+      z: `+=${220 + i * 50}`,
+      x: `+=${(i % 3 === 0 ? 1 : -1) * 70}`,
+      y: `+=${(i % 2 === 0 ? -1 : 1) * 45}`,
+      scale: `*=1.12`,
+      rotateZ: `+=${(i % 2 === 0 ? -1 : 1) * 2}`,
+      duration: 1.6, ease: 'power1.inOut'
+    }, 'travel+=' + (i * 0.04));
   });
 
-  // 4. Physical Card Object 3D Tilt & Ground Shadow Response
-  const cardWraps = track.querySelectorAll('.belt-card-wrap');
-  cardWraps.forEach((wrap, idx) => {
-    const card = wrap.querySelector('.belt-card');
-    const shadow = wrap.querySelector('.card-ground-shadow');
-    if (!card) return;
+  /* Peak moment — surrounding viewer with work */
+  tl.addLabel('peak', 2.5);
+  tl.to([...bgPanels, ...midPanels], {
+    opacity: 0.9, duration: 0.4
+  }, 'peak');
 
-    // Slight initial rotation along the conveyor belt
-    gsap.set(card, {
-      rotateZ: (idx % 2 === 0 ? 1 : -1) * (1.5 + Math.random() * 2)
-    });
+  /* ─────────────────────────────────────────────────────
+     PHASE 4 — CONVERGENCE (2.8 – 3.8s)
+     Camera slows. All panels begin moving toward center.
+     Universe collapses.
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('converge', 2.8);
 
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
+  /* World reverses — camera pulls back slightly */
+  tl.to(plWorld, {
+    z: 200, duration: 1.0, ease: 'power2.inOut'
+  }, 'converge');
 
-      gsap.to(card, {
-        rotateY: (x / rect.width) * 18,
-        rotateX: (y / rect.height) * -18,
-        duration: 0.35,
-        ease: 'power2.out'
-      });
-    });
+  /* All panels collapse toward centre, shrink, fade */
+  panels.forEach((p, i) => {
+    tl.to(p, {
+      x: 0, y: 0, z: -200,
+      scale: 0.08,
+      opacity: 0,
+      rotateZ: 0,
+      duration: 0.9,
+      stagger: 0,
+      ease: 'power3.in'
+    }, 'converge+=' + (i * 0.025));
+  });
 
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, {
-        rotateY: 0,
-        rotateX: 0,
-        duration: 0.6,
-        ease: 'power2.out'
-      });
+  /* Shaft fades out */
+  tl.to(plShaft, { opacity: 0, duration: 0.4 }, 'converge+=0.1');
+
+  /* ─────────────────────────────────────────────────────
+     PHASE 5 — CUT TO BLACK (3.8 – 4.1s)
+     Everything gone. Held darkness. Anticipation peak.
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('blackout', 3.8);
+  tl.to({}, { duration: 0.3 }, 'blackout');         // silent hold
+
+  /* ─────────────────────────────────────────────────────
+     PHASE 6 — ANANT K REVEAL (4.1 – 5.1s)
+     1. Thin gold scanline sweeps across the darkness
+     2. Logo clip-path opens left → right behind it
+     3. Fill text materialises
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('reveal', 4.1);
+
+  /* Identity container fades in */
+  tl.to(plIdentity, { opacity: 1, duration: 0.01 }, 'reveal');
+
+  /* Scanline sweeps left → right (600ms) */
+  tl.fromTo(plScanline,
+    { opacity: 0.9, x: '-110%' },
+    { x: '110%', duration: 0.65, ease: 'power2.inOut' },
+  'reveal');
+  tl.to(plScanline, { opacity: 0, duration: 0.15 }, 'reveal+=0.6');
+
+  /* Logo clip rect grows from 0 → full width in sync with scanline */
+  if (plClipRect) {
+    const svgW = 900;
+    tl.to(plClipRect, {
+      attr: { width: svgW },
+      duration: 0.68, ease: 'power2.inOut'
+    }, 'reveal+=0.02');
+  }
+
+  /* Subtle scale-in on the SVG as it materialises */
+  tl.fromTo(plLogoSvg,
+    { scale: 0.96, opacity: 0.0 },
+    { scale: 1.0, opacity: 1, duration: 0.5, ease: 'power2.out' },
+  'reveal+=0.1');
+
+  /* ─────────────────────────────────────────────────────
+     PHASE 7 — HERO IDENTITY LOCK (5.1 – 5.7s)
+     Logo fully visible, hold, then final light sweep.
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('lock', 5.1);
+
+  /* Hold 400ms */
+  tl.to({}, { duration: 0.4 }, 'lock');
+
+  /* Tagline appears beneath logo */
+  tl.to(plTagline, {
+    opacity: 1, y: 0, duration: 0.5, ease: 'power2.out'
+  }, 'lock+=0.05');
+
+  /* Final specular light sweep across wordmark */
+  if (plSweepRect) {
+    tl.fromTo(plSweepRect,
+      { attr: { x: '-900' } },
+      { attr: { x: '900' }, duration: 0.75, ease: 'power2.inOut' },
+    'lock+=0.3');
+  }
+
+  /* ─────────────────────────────────────────────────────
+     PHASE 8 — TRANSITION INTO WEBSITE (5.7 – 6.5s)
+     Logo scales and fades. Website reveals beneath.
+  ───────────────────────────────────────────────────── */
+  tl.addLabel('transition', 5.75);
+
+  /* Camera push through logo */
+  tl.to(plIdentity, {
+    scale: 1.18,
+    opacity: 0,
+    duration: 0.65,
+    ease: 'power3.in'
+  }, 'transition');
+
+  /* Website fades in */
+  tl.to(main, {
+    opacity: 1, duration: 0.7, ease: 'power2.out'
+  }, 'transition+=0.15');
+
+  tl.to(navbar, {
+    opacity: 1, duration: 0.5, ease: 'power2.out'
+  }, 'transition+=0.3');
+
+  /* Trigger hero entrance animations */
+  tl.add(() => {
+    if (window.heroTl) heroTl.play();
+    
+    // Force ScrollTrigger to recalculate now that #main is fully visible and laid out
+    if (window.ScrollTrigger) {
+      ScrollTrigger.refresh(true);
+    }
+  }, 'transition+=0.4');
+}
+
+/* ============================================================
+   GLOBAL SCROLL REVEALS
+   Adds smooth motion to text and divs as they enter the viewport
+   ============================================================ */
+function initGlobalScrollReveals() {
+  if (!window.gsap || !window.ScrollTrigger) return;
+  
+  // Select main content elements across the site (excluding hero which has its own timeline)
+  const revealElements = gsap.utils.toArray(`
+    .philosophy-text, 
+    .section-header h2, 
+    .section-subtitle, 
+    .project-row, 
+    .achievement-card, 
+    .leetcode-card
+  `);
+  
+  revealElements.forEach(el => {
+    // Set initial state immediately to prevent flashing
+    gsap.set(el, { opacity: 0, y: 50 });
+    
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        scroller: '#main',
+        start: 'top 85%', // Trigger when the top of the element hits 85% of the viewport height
+        toggleActions: 'play none none none' // Play once and don't reverse
+      },
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: 'power3.out'
     });
   });
 }
 
 /* Master Initialization */
 function boot() {
+  initCinematic3DPreloader();
   initNavbarToggle();
   initProjectOrbit();
   initInteractiveTextHover();
@@ -1285,7 +1515,7 @@ function boot() {
   initAchievementTitleParallax();
   initFooterCTAPhysics();
   initAITerminalShowcase();
-  initTesla3DBeltMarquee();
+  initGlobalScrollReveals();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 

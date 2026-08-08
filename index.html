@@ -15,10 +15,134 @@
 <div class="cursor-ring" id="cursorRing"><span class="cursor-label"></span></div>
 <canvas id="particleCanvas"></canvas>
 
-<!-- Preloader -->
-<div id="preloader">
-  <span class="preloader-text">Loading</span>
-</div>
+<!-- ============================================================
+     NEW CINEMATIC 3D STUDIO-IDENT PRELOADER
+     DARKNESS → 3D SPACE → PROJECT UNIVERSE → CONVERGENCE → ANANT K → WEBSITE
+     ============================================================ -->
+<div id="pl" class="pl">
+  <!-- Ambient particle canvas -->
+  <canvas class="pl-canvas" id="plCanvas"></canvas>
+
+  <!-- Depth vignette overlay -->
+  <div class="pl-vignette" id="plVignette"></div>
+
+  <!-- Cinematic light shaft (horizontal) -->
+  <div class="pl-shaft" id="plShaft"></div>
+
+  <!-- 3D World — CSS perspective container holding all panels -->
+  <div class="pl-world" id="plWorld">
+
+    <!-- LAYER 1 — FAR BACKGROUND (Z -1200 to -800) -->
+    <div class="pl-panel pl-panel--bg" style="--tx:-38%;--ty:-15%;--tz:-1200px;--rx:8deg;--ry:14deg;--rz:-3deg;--s:1.1">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="3D WebGL" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--bg" style="--tx:42%;--ty:20%;--tz:-1050px;--rx:-6deg;--ry:-12deg;--rz:4deg;--s:1.0">
+      <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=700&q=80" alt="AI Neural" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--bg" style="--tx:-5%;--ty:35%;--tz:-900px;--rx:10deg;--ry:5deg;--rz:-5deg;--s:0.9">
+      <img src="https://images.unsplash.com/photo-1620825937374-87fc7d6bddc2?w=700&q=80" alt="Digital Interface" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+
+    <!-- LAYER 2 — MIDGROUND (Z -600 to -350) -->
+    <div class="pl-panel pl-panel--mid" style="--tx:-55%;--ty:5%;--tz:-620px;--rx:-5deg;--ry:18deg;--rz:2deg;--s:1.2">
+      <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=700&q=80" alt="Generative AI" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--mid" style="--tx:50%;--ty:-22%;--tz:-550px;--rx:7deg;--ry:-15deg;--rz:-4deg;--s:1.15">
+      <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=700&q=80" alt="Creative Code" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--mid" style="--tx:15%;--ty:42%;--tz:-480px;--rx:-8deg;--ry:8deg;--rz:6deg;--s:1.05">
+      <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=700&q=80" alt="SaaS Dashboard" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--mid" style="--tx:-30%;--ty:-30%;--tz:-400px;--rx:5deg;--ry:-10deg;--rz:-2deg;--s:1.1">
+      <img src="https://images.unsplash.com/photo-1588912914076-6df7028a4a15?w=700&q=80" alt="Tech Interface" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+
+    <!-- LAYER 3 — FOREGROUND (Z -200 to 0) — largest, most imposing -->
+    <div class="pl-panel pl-panel--fg" style="--tx:-62%;--ty:-8%;--tz:-220px;--rx:-3deg;--ry:22deg;--rz:1deg;--s:1.3">
+      <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&q=80" alt="Modern Web" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--fg" style="--tx:58%;--ty:12%;--tz:-180px;--rx:4deg;--ry:-20deg;--rz:-3deg;--s:1.25">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80" alt="Developer Setup" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--fg" style="--tx:-15%;--ty:52%;--tz:-120px;--rx:-10deg;--ry:6deg;--rz:5deg;--s:1.2">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80" alt="Digital World" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--fg" style="--tx:22%;--ty:-45%;--tz:-80px;--rx:6deg;--ry:-8deg;--rz:-6deg;--s:1.15">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" alt="Circuit Board" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+    <div class="pl-panel pl-panel--fg" style="--tx:-42%;--ty:30%;--tz:-40px;--rx:-4deg;--ry:16deg;--rz:3deg;--s:1.1">
+      <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80" alt="Matrix Code" loading="eager">
+      <div class="pl-panel-glare"></div>
+    </div>
+
+  </div><!-- /.pl-world -->
+
+  <!-- ANANT K Identity Reveal -->
+  <div class="pl-identity" id="plIdentity">
+
+    <!-- Thin light line that sweeps before reveal -->
+    <div class="pl-scanline" id="plScanline"></div>
+
+    <!-- ANANT K Custom SVG Wordmark -->
+    <svg class="pl-logo-svg" id="plLogoSvg" viewBox="0 0 900 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ANANT K">
+      <defs>
+        <linearGradient id="plGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stop-color="#ffffff"/>
+          <stop offset="28%"  stop-color="#f7e0a0"/>
+          <stop offset="65%"  stop-color="#d4a03a"/>
+          <stop offset="100%" stop-color="#8a5f1a"/>
+        </linearGradient>
+        <!-- Clip path that opens left→right for reveal -->
+        <clipPath id="plRevealClip">
+          <rect id="plClipRect" x="0" y="0" width="0" height="160"/>
+        </clipPath>
+        <!-- Light sweep gradient -->
+        <linearGradient id="plSweep" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
+          <stop offset="40%"  stop-color="rgba(255,255,255,0.9)"/>
+          <stop offset="50%"  stop-color="#ffffff"/>
+          <stop offset="60%"  stop-color="rgba(255,255,255,0.9)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </linearGradient>
+        <mask id="plSweepMask">
+          <text x="450" y="122" text-anchor="middle" font-family="'Sora','Arial Black',sans-serif" font-size="130" font-weight="900" letter-spacing="18" fill="white">ANANT K</text>
+        </mask>
+      </defs>
+
+      <!-- Ghost outline — always visible at low opacity -->
+      <text class="pl-text-ghost" x="450" y="122" text-anchor="middle"
+            font-family="'Sora','Arial Black',sans-serif" font-size="130" font-weight="900" letter-spacing="18"
+            fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1">ANANT K</text>
+
+      <!-- Filled gold wordmark — revealed via clip-path animation -->
+      <g clip-path="url(#plRevealClip)">
+        <text class="pl-text-fill" x="450" y="122" text-anchor="middle"
+              font-family="'Sora','Arial Black',sans-serif" font-size="130" font-weight="900" letter-spacing="18"
+              fill="url(#plGold)">ANANT K</text>
+      </g>
+
+      <!-- Light sweep overlay (fires after full reveal) -->
+      <rect id="plSweepRect" x="-900" y="0" width="900" height="160"
+            fill="url(#plSweep)" mask="url(#plSweepMask)"/>
+    </svg>
+
+    <!-- Tagline beneath logo -->
+    <p class="pl-tagline" id="plTagline">Creative Developer &amp; AI Engineer</p>
+
+  </div><!-- /.pl-identity -->
+
+</div><!-- /#pl -->
 
 <!-- Fixed Header Navbar -->
 <header class="navbar" id="navbar">
@@ -169,176 +293,71 @@
 
     </div>
 
-    <!-- marquee tag  -->
-   
-    <!-- Apple Vision Pro + Cuberto 3D Glass Capsule Marquee Showcase -->
-    <!-- Tesla + Apple + Active Theory 3D Conveyor Belt Marquee Showcase -->
-    <div class="belt-marquee-section" id="beltMarqueeSection">
-      <canvas class="belt-bg-canvas" id="beltBgCanvas"></canvas>
-      <div class="belt-radial-glow"></div>
-      <div class="belt-cinematic-light"></div>
+    <!-- ══ Premium Dual-Row Infinite Marquee ══ -->
+    <div class="mq-section" id="mqSection">
 
-      <div class="belt-stage-container" id="beltStageContainer">
-        <!-- 3D Physical Conveyor Belt Track -->
-        <div class="belt-track" id="beltTrack">
-          <!-- Card Set 1 -->
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">⚡ AI & LOGIC</div>
-              <h3>AI Engineer</h3>
-              <p>Autonomous Agents & LLM Pipelines</p>
-              <div class="card-footer-spec">PRO SPEC 01</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
+      <!-- Decorative header label -->
+      <div class="mq-label">
+        <span class="mq-label-line"></span>
+        <span class="mq-label-text">CAPABILITIES</span>
+        <span class="mq-label-line"></span>
+      </div>
 
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">⚙️ ARCHITECTURE</div>
-              <h3>Backend API</h3>
-              <p>Scalable Microservices & Databases</p>
-              <div class="card-footer-spec">PRO SPEC 02</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">✦ CREATIVE UI</div>
-              <h3>Creative Coding</h3>
-              <p>Shader Art & Dynamic Layouts</p>
-              <div class="card-footer-spec">PRO SPEC 03</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">🎲 3D WEBGL</div>
-              <h3>Three.js</h3>
-              <p>Immersive 3D Viewports & Models</p>
-              <div class="card-footer-spec">PRO SPEC 04</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">🚀 ANIMATION</div>
-              <h3>GSAP 3</h3>
-              <p>Smooth Timelines & ScrollTriggers</p>
-              <div class="card-footer-spec">PRO SPEC 05</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">🟢 RUNTIME</div>
-              <h3>Node.js</h3>
-              <p>High-Performance Event Loops</p>
-              <div class="card-footer-spec">PRO SPEC 06</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">✨ SHADERS</div>
-              <h3>WebGL</h3>
-              <p>GLSL Shader Pipelines & GPU Effects</p>
-              <div class="card-footer-spec">PRO SPEC 07</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <!-- Seamless Duplicate Set for Infinite Marquee Loop -->
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">⚡ AI & LOGIC</div>
-              <h3>AI Engineer</h3>
-              <p>Autonomous Agents & LLM Pipelines</p>
-              <div class="card-footer-spec">PRO SPEC 01</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">⚙️ ARCHITECTURE</div>
-              <h3>Backend API</h3>
-              <p>Scalable Microservices & Databases</p>
-              <div class="card-footer-spec">PRO SPEC 02</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">✦ CREATIVE UI</div>
-              <h3>Creative Coding</h3>
-              <p>Shader Art & Dynamic Layouts</p>
-              <div class="card-footer-spec">PRO SPEC 03</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">🎲 3D WEBGL</div>
-              <h3>Three.js</h3>
-              <p>Immersive 3D Viewports & Models</p>
-              <div class="card-footer-spec">PRO SPEC 04</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">🚀 ANIMATION</div>
-              <h3>GSAP 3</h3>
-              <p>Smooth Timelines & ScrollTriggers</p>
-              <div class="card-footer-spec">PRO SPEC 05</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">🟢 RUNTIME</div>
-              <h3>Node.js</h3>
-              <p>High-Performance Event Loops</p>
-              <div class="card-footer-spec">PRO SPEC 06</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
-
-          <div class="belt-card-wrap">
-            <div class="belt-card">
-              <div class="card-reflection"></div>
-              <div class="card-badge">✨ SHADERS</div>
-              <h3>WebGL</h3>
-              <p>GLSL Shader Pipelines & GPU Effects</p>
-              <div class="card-footer-spec">PRO SPEC 07</div>
-            </div>
-            <div class="card-ground-shadow"></div>
-          </div>
+      <!-- ROW 1 — moves LEFT (default) -->
+      <div class="mq-row mq-row--left">
+        <div class="mq-track" id="mqTrack1">
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>AI Engineer</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Three.js</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Creative Dev</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>React</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>WebGL</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Node.js</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>GSAP</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Backend API</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Python</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Motion Design</div>
+          <!-- Duplicate for seamless loop -->
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>AI Engineer</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Three.js</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Creative Dev</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>React</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>WebGL</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Node.js</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>GSAP</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>Backend API</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Python</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Motion Design</div>
         </div>
       </div>
-    </div>
+
+      <!-- ROW 2 — moves RIGHT -->
+      <div class="mq-row mq-row--right">
+        <div class="mq-track" id="mqTrack2">
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>TypeScript</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>LLM Agents</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>PostgreSQL</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>UI / UX</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>REST APIs</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Full Stack</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Docker</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Next.js</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>CSS Art</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Open AI</div>
+          <!-- Duplicate for seamless loop -->
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>TypeScript</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>LLM Agents</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>PostgreSQL</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>UI / UX</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">◈</span>REST APIs</div>
+          <div class="mq-chip mq-chip--accent" data-glow="#d4a03a"><span class="mq-chip-icon">✦</span>Full Stack</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Docker</div>
+          <div class="mq-chip" data-glow="#ff6b9d"><span class="mq-chip-icon">◉</span>Next.js</div>
+          <div class="mq-chip" data-glow="#3ecfff"><span class="mq-chip-icon">⟡</span>CSS Art</div>
+          <div class="mq-chip" data-glow="#7c6aff"><span class="mq-chip-icon">⬡</span>Open AI</div>
+        </div>
+      </div>
+
+    </div><!-- /.mq-section -->
 
 
 
