@@ -247,7 +247,37 @@
         </div>
 
         <div class="hero-center">
-          <div class="hero-image-wrap">
+          <div class="hero-image-wrap" id="heroInteractiveWrap">
+            <!-- SVG Displacement Filter for Liquid Warp Effect -->
+            <svg class="hero-warp-svg" width="0" height="0">
+              <filter id="heroWarpFilter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="2" result="noise" id="heroTurbulence"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="heroDisplacement"/>
+              </filter>
+            </svg>
+
+            <!-- Interactive Cursor Light -->
+            <div class="cursor-hero-light" id="cursorHeroLight"></div>
+
+            <!-- Digital UI Fragments (Phase 3) -->
+            <div class="digital-ui-fragment ui-top-left">SYS_READY</div>
+            <div class="digital-ui-fragment ui-bottom-right">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M2 12h20M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+            </div>
+            <div class="digital-ui-fragment ui-top-right">API: CONNECTED</div>
+            <div class="digital-ui-fragment ui-bottom-left">V_1.0.4</div>
+
+            <!-- Floating 3D Project Cards (Phase 4) -->
+            <div class="floating-project-card card-1">
+              <img src="assets/colocola.png" alt="Project 1">
+            </div>
+            <div class="floating-project-card card-2">
+              <img src="assets/animated1.png" alt="Project 2">
+            </div>
+            <div class="floating-project-card card-3">
+              <img src="assets/webimage.png" alt="Project 3">
+            </div>
+
             <!-- Intense Background Glow Layer -->
             <div class="hero-bg-glow-intense"></div>
 
@@ -297,7 +327,10 @@
             </div>
 
             <div class="hero-image-glow"></div>
-            <img src="assets/hero.png" alt="annt portrait" class="hero-image">
+            <!-- Wrapped image to apply SVG filter correctly without breaking bounding box -->
+            <div class="hero-image-inner" id="heroImageInner">
+              <img src="assets/hero.png" alt="annt portrait" class="hero-image" id="heroPortrait">
+            </div>
           </div>
         </div>
 
