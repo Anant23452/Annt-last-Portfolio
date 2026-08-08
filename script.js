@@ -1505,8 +1505,72 @@ function initGlobalScrollReveals() {
   });
 }
 
+/* ---------- Cinematic Hero Portrait Hover ---------- */
+function initCinematicHeroHover() {
+  const wrap = document.getElementById('heroInteractiveWrap');
+  const inner = document.getElementById('heroImageInner');
+  const filter = document.getElementById('heroDisplacement');
+  const portrait = document.getElementById('heroPortrait');
+
+  // Ensure elements exist and this isn't mobile (touch device)
+  if (!wrap || !inner || !filter) return;
+  const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouch) return;
+
+  let isHovering = false;
+
+  wrap.addEventListener('mouseenter', () => {
+    isHovering = true;
+    
+    // Toggle editorial filter style via CSS
+    portrait.classList.add('editorial-mode');
+
+    // 1. Scale inner up slightly and prepare for 3D perspective
+    gsap.to(inner, { scale: 1.05, duration: 1.2, ease: "power3.out" });
+    
+    // 2. Animate SVG filter scale from 0 to subtle distortion
+    gsap.to(filter, { attr: { scale: 15 }, duration: 1.2, ease: "power2.out" });
+  });
+
+  wrap.addEventListener('mousemove', (e) => {
+    if (!isHovering) return;
+    
+    const rect = wrap.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Normalized coordinates (-1 to 1)
+    const nx = (x / rect.width) * 2 - 1;
+    const ny = (y / rect.height) * 2 - 1;
+
+    // Inner Portrait parallax (medium movement)
+    gsap.to(inner, {
+      x: nx * 10,
+      y: ny * 10,
+      rotateX: ny * -3,
+      rotateY: nx * 3,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  });
+
+  wrap.addEventListener('mouseleave', () => {
+    isHovering = false;
+    
+    // Revert editorial filter
+    portrait.classList.remove('editorial-mode');
+
+    // Smoothly reset portrait
+    gsap.to(inner, { x: 0, y: 0, z: 0, scale: 1, rotateX: 0, rotateY: 0, duration: 1.2, ease: "power3.out", overwrite: true });
+    
+    // Revert displacement to 0
+    gsap.to(filter, { attr: { scale: 0 }, duration: 1.2, ease: "power3.out" });
+  });
+}
+
 /* Master Initialization */
 function boot() {
+  initCinematicHeroHover();
   initCinematic3DPreloader();
   initNavbarToggle();
   initProjectOrbit();
