@@ -432,6 +432,9 @@ function initProjectRowHover() {
       if (activeRow && activeRow !== row) {
         const prevDrawer = activeRow.querySelector('.project-row-drawer');
         const prevMedia = activeRow.querySelectorAll('.media-box');
+        const prevVideo = activeRow.querySelector('video');
+        
+        if (prevVideo) prevVideo.pause();
 
         gsap.killTweensOf([activeRow, prevDrawer, prevMedia]);
         gsap.to(activeRow, { backgroundColor: 'transparent', duration: 0.6, ease: 'power2.out' });
@@ -462,6 +465,13 @@ function initProjectRowHover() {
         duration: 0.75,
         ease: 'power3.out'
       });
+      
+      // Play video if present
+      const video = drawer.querySelector('video');
+      if (video) {
+        video.currentTime = 0;
+        video.play().catch(e => console.warn("Video auto-play prevented:", e));
+      }
 
       // Staggered pop-in of media boxes
       gsap.fromTo(mediaBoxes,
@@ -472,6 +482,10 @@ function initProjectRowHover() {
 
     row.addEventListener('mouseleave', () => {
       gsap.killTweensOf([row, drawer, mediaBoxes]);
+
+      // Pause video if present
+      const video = drawer.querySelector('video');
+      if (video) video.pause();
 
       // Retract drawer height smoothly
       gsap.to(drawer, {
