@@ -1750,20 +1750,29 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   overflow: hidden;
 }
 
-/* Funky Glassy Gradient Background on Hover/Active */
+/* Funky Glassy Animated Gradient Background on Hover/Active */
 .project-row::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(124, 106, 255, 0.08) 0%, rgba(62, 207, 255, 0.04) 50%, rgba(212, 160, 58, 0.08) 100%);
+  background: var(--hover-bg, linear-gradient(120deg, rgba(124, 106, 255, 0.15) 0%, rgba(212, 160, 58, 0.15) 50%, rgba(62, 207, 255, 0.15) 100%));
+  background-size: 200% 200%;
   opacity: 0;
   transition: opacity 0.5s ease;
   z-index: 0;
   pointer-events: none;
 }
+
+@keyframes funkyMeshMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .project-row:hover::before,
 .project-row.active::before {
   opacity: 1;
+  animation: funkyMeshMove 4s ease infinite;
 }
 
 .project-row-header {
@@ -1798,7 +1807,7 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 .project-row:hover .project-row-title,
 .project-row.active .project-row-title {
   transform: translateX(12px);
-  background: linear-gradient(135deg, #7c6aff 0%, #3ecfff 50%, #d4a03a 100%);
+  background: var(--hover-text, linear-gradient(135deg, #7c6aff 0%, #3ecfff 50%, #d4a03a 100%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 3s linear infinite;
@@ -1872,7 +1881,10 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   height: 0;
   opacity: 0;
   overflow: hidden;
-  padding: 0 24px;
+  will-change: height, opacity;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.0);
+  position: relative;
+  z-index: 1;
 }
 
 .drawer-content {
@@ -2702,6 +2714,8 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
   }
   .project-row-drawer {
     padding: 0 16px 32px;
+    position: relative;
+    z-index: 1;
   }
 
   /* Skills Orbit */

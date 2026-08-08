@@ -437,7 +437,6 @@ function initProjectRowHover() {
         if (prevVideo) prevVideo.pause();
 
         gsap.killTweensOf([activeRow, prevDrawer, prevMedia]);
-        gsap.to(activeRow, { backgroundColor: 'transparent', duration: 0.6, ease: 'power2.out' });
         gsap.to(prevDrawer, { height: 0, opacity: 0, duration: 0.5, ease: 'power3.inOut' });
         gsap.to(prevMedia, { y: 25, scale: 0.95, opacity: 0, duration: 0.35, ease: 'power2.in' });
         activeRow.classList.remove('active');
@@ -446,13 +445,8 @@ function initProjectRowHover() {
       activeRow = row;
       row.classList.add('active');
 
-      // Animate row background color
+      // Let CSS handle the funky gradient background via .active class
       gsap.killTweensOf(row);
-      gsap.to(row, {
-        backgroundColor: bg,
-        duration: 0.6,
-        ease: 'power2.out'
-      });
 
       // Calculate target height
       const targetHeight = drawerContent.offsetHeight;
@@ -495,12 +489,8 @@ function initProjectRowHover() {
         ease: 'power3.inOut'
       });
 
-      // Fade out background color
-      gsap.to(row, {
-        backgroundColor: 'transparent',
-        duration: 0.6,
-        ease: 'power2.out'
-      });
+      // Background color fades automatically via CSS transition on class removal
+
 
       // Reset media boxes
       gsap.to(mediaBoxes, {
