@@ -892,6 +892,386 @@ function initFooterCTAPhysics() {
   ro.observe(container);
 }
 
+/* ============================================================
+   Awwwards Interactive Futuristic AI Terminal Workspace Panel
+   - Canvas background with floating particles & connecting lines
+   - Interactive golden spotlight & 3D tilt mouse parallax
+   - Real character-by-character terminal typing loop
+   - Click ripple wave & particle spark bursts
+   ============================================================ */
+function initAITerminalShowcase() {
+  const panel = document.getElementById('aiTerminalShowcase');
+  const canvas = document.getElementById('aiBgCanvas');
+  const spotlight = document.getElementById('aiSpotlight');
+  if (!panel || !canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  function resizeCanvas() {
+    width = canvas.width = panel.clientWidth;
+    height = canvas.height = panel.clientHeight;
+  }
+
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // 1. Particle System Setup
+  const particles = [];
+  const particleCount = 24;
+  let mouseX = width / 2;
+  let mouseY = height / 2;
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.6,
+      vy: (Math.random() - 0.5) * 0.6,
+      radius: Math.random() * 1.8 + 0.8,
+      alpha: Math.random() * 0.5 + 0.3
+    });
+  }
+
+  // Click Ripples and Sparks
+  const ripples = [];
+  const sparks = [];
+
+  panel.addEventListener('click', (e) => {
+    const rect = panel.getBoundingClientRect();
+    const rx = e.clientX - rect.left;
+    const ry = e.clientY - rect.top;
+
+    ripples.push({ x: rx, y: ry, radius: 0, alpha: 1 });
+
+    for (let i = 0; i < 12; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 2.5 + 1;
+      sparks.push({
+        x: rx,
+        y: ry,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        life: 1
+      });
+    }
+  });
+
+  // Canvas Render Loop
+  function renderCanvas() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Subtle Grid Lines
+    ctx.strokeStyle = 'rgba(217, 164, 65, 0.05)';
+    ctx.lineWidth = 1;
+    const gridSize = 24;
+    for (let x = 0; x < width; x += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, height);
+      ctx.stroke();
+    }
+    for (let y = 0; y < height; y += gridSize) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(width, y);
+      ctx.stroke();
+    }
+
+    // Render & Connect Particles
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      ctx.fillStyle = `rgba(240, 200, 118, ${p.alpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Connecting lines
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+        if (dist < 55) {
+          ctx.strokeStyle = `rgba(217, 164, 65, ${0.25 * (1 - dist / 55)})`;
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Render Ripples
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      const r = ripples[i];
+      r.radius += 3.5;
+      r.alpha -= 0.025;
+      if (r.alpha <= 0) {
+        ripples.splice(i, 1);
+        continue;
+      }
+      ctx.strokeStyle = `rgba(255, 224, 130, ${r.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    // Render Sparks
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const s = sparks[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      s.alpha -= 0.03;
+      if (s.alpha <= 0) {
+        sparks.splice(i, 1);
+        continue;
+      }
+      ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(renderCanvas);
+  }
+
+  renderCanvas();
+
+  // 2. 3D Tilt & Mouse Interactions
+  panel.addEventListener('mousemove', (e) => {
+    const rect = panel.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    mouseX = x;
+    mouseY = y;
+
+    // Move Spotlight
+    if (spotlight) {
+      spotlight.style.left = `${x}px`;
+      spotlight.style.top = `${y}px`;
+    }
+
+    // 3D Tilt
+    const rotateX = ((y - rect.height / 2) / rect.height) * -22;
+    const rotateY = ((x - rect.width / 2) / rect.width) * 24;
+
+    gsap.to(panel, {
+      rotateX: rotateX,
+      rotateY: rotateY,
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+  });
+
+  panel.addEventListener('mouseleave', () => {
+    gsap.to(panel, {
+      rotateX: 0,
+      rotateY: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+  });
+
+  // 3. Realistic Character-by-Character Terminal Typing Loop
+  const lines = [
+    { target: 'termLine1', text: '> Initializing Portfolio...', cls: 'info' },
+    { target: 'termLine2', text: '✔ AI Agent Connected', cls: 'success' },
+    { target: 'termLine3', text: '✔ Creative Engine Ready', cls: 'success' },
+    { target: 'termLine4', text: '✔ Deploy Successful', cls: 'success' }
+  ];
+
+  const activeLineEl = document.getElementById('termActiveLine');
+
+  async function typeTerminalLoop() {
+    while (true) {
+      // Clear all lines
+      lines.forEach((l) => {
+        const el = document.getElementById(l.target);
+        if (el) {
+          el.textContent = '';
+          el.className = 'terminal-line';
+        }
+      });
+      if (activeLineEl) activeLineEl.textContent = '';
+
+      // Type lines step-by-step
+      for (let i = 0; i < lines.length; i++) {
+        const item = lines[i];
+        const lineEl = document.getElementById(item.target);
+
+        for (let c = 0; c < item.text.length; c++) {
+          if (lineEl) lineEl.textContent += item.text[c];
+          await new Promise((res) => setTimeout(res, 35 + Math.random() * 40));
+        }
+
+        if (lineEl) lineEl.classList.add(item.cls);
+        await new Promise((res) => setTimeout(res, 350));
+      }
+
+      // Type prompt line
+      const promptText = '> System Operational';
+      for (let c = 0; c < promptText.length; c++) {
+        if (activeLineEl) activeLineEl.textContent += promptText[c];
+        await new Promise((res) => setTimeout(res, 45 + Math.random() * 30));
+      }
+
+      // Hold visible state for 4.5 seconds before restart loop
+      await new Promise((res) => setTimeout(res, 4500));
+    }
+  }
+
+  typeTerminalLoop();
+}
+
+/* ============================================================
+   Tesla + Apple + Active Theory 3D Conveyor Belt Marquee
+   - Infinite 3D physical object conveyor belt
+   - Realistic projected ground shadow, card tilt & specular glow
+   - Interactive camera perspective stage tilt
+   - GSAP timeline animation with smooth speed scaling
+   ============================================================ */
+function initTesla3DBeltMarquee() {
+  const section = document.getElementById('beltMarqueeSection');
+  const track = document.getElementById('beltTrack');
+  const canvas = document.getElementById('beltBgCanvas');
+  const glow = section ? section.querySelector('.belt-radial-glow') : null;
+  if (!section || !track) return;
+
+  // 1. Background Particles Canvas
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let w = (canvas.width = section.clientWidth);
+    let h = (canvas.height = section.clientHeight);
+
+    window.addEventListener('resize', () => {
+      if (canvas && section) {
+        w = canvas.width = section.clientWidth;
+        h = canvas.height = section.clientHeight;
+      }
+    });
+
+    const particles = [];
+    for (let i = 0; i < 25; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.6 + 0.6,
+        alpha: Math.random() * 0.45 + 0.2
+      });
+    }
+
+    function renderBg() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+
+        ctx.fillStyle = `rgba(240, 200, 118, ${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(renderBg);
+    }
+    renderBg();
+  }
+
+  // 2. Continuous Infinite GSAP Conveyor Belt Timeline
+  const beltTween = gsap.to(track, {
+    x: '-50%',
+    duration: 30,
+    ease: 'none',
+    repeat: -1
+  });
+
+  // Slow down smooth speed on hover
+  section.addEventListener('mouseenter', () => {
+    gsap.to(beltTween, { timeScale: 0.35, duration: 0.6, ease: 'power2.out' });
+  });
+
+  section.addEventListener('mouseleave', () => {
+    gsap.to(beltTween, { timeScale: 1.0, duration: 0.6, ease: 'power2.out' });
+    if (glow) {
+      gsap.to(glow, { x: 0, y: 0, opacity: 0.8, duration: 0.8, ease: 'power2.out' });
+    }
+  });
+
+  // 3. Interactive Camera Perspective Stage Tilt
+  section.addEventListener('mousemove', (e) => {
+    const rect = section.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotX = 18 + (y / rect.height) * -8;
+    const rotZ = -1.5 + (x / rect.width) * 4;
+
+    gsap.to(track, {
+      rotateX: rotX,
+      rotateZ: rotZ,
+      duration: 0.5,
+      ease: 'power2.out'
+    });
+
+    if (glow) {
+      gsap.to(glow, {
+        x: x * 0.4,
+        y: y * 0.4,
+        opacity: 1,
+        duration: 0.4,
+        ease: 'power2.out'
+      });
+    }
+  });
+
+  // 4. Physical Card Object 3D Tilt & Ground Shadow Response
+  const cardWraps = track.querySelectorAll('.belt-card-wrap');
+  cardWraps.forEach((wrap, idx) => {
+    const card = wrap.querySelector('.belt-card');
+    const shadow = wrap.querySelector('.card-ground-shadow');
+    if (!card) return;
+
+    // Slight initial rotation along the conveyor belt
+    gsap.set(card, {
+      rotateZ: (idx % 2 === 0 ? 1 : -1) * (1.5 + Math.random() * 2)
+    });
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(card, {
+        rotateY: (x / rect.width) * 18,
+        rotateX: (y / rect.height) * -18,
+        duration: 0.35,
+        ease: 'power2.out'
+      });
+    });
+
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, {
+        rotateY: 0,
+        rotateX: 0,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+    });
+  });
+}
+
 /* Master Initialization */
 function boot() {
   initNavbarToggle();
@@ -904,6 +1284,8 @@ function boot() {
   initFooterLiquidShaderName();
   initAchievementTitleParallax();
   initFooterCTAPhysics();
+  initAITerminalShowcase();
+  initTesla3DBeltMarquee();
   if (window.ScrollTrigger) ScrollTrigger.refresh();
 }
 

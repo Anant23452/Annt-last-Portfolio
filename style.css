@@ -353,28 +353,218 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
 
 
-.showcase{
-    
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-top:26px;
-  justify-content: center;
-  
+/* ============================================================
+   Awwwards Interactive Futuristic AI Terminal Workspace Panel
+   ============================================================ */
+
+.show-case {
+  margin-top: 24px;
+  perspective: 1000px;
 }
-.img-small{
-    margin-top: 2vh;
-    margin: auto;
-    width:20vw;
-    height:20vh;
-    border-radius: 12px;
-    
-    
-    
-    img{
-        width:100%;height:100%;object-fit:cover;
-    }
-  }
+
+.ai-terminal-showcase {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 205px;
+  border-radius: 20px;
+  background: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.ai-terminal-showcase:hover {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Background Particle Canvas */
+.ai-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Interactive Cursor Spotlight Glow */
+.ai-spotlight {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 164, 65, 0.28) 0%, rgba(217, 164, 65, 0) 70%);
+  pointer-events: none;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ai-terminal-showcase:hover .ai-spotlight {
+  opacity: 1;
+}
+
+/* Floating Glass Tech Cards */
+.tech-float-pill {
+  position: absolute;
+  z-index: 4;
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(14, 11, 8, 0.9);
+  border: 1px solid rgba(217, 164, 65, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6), 0 0 12px rgba(217, 164, 65, 0.2);
+  pointer-events: auto;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  will-change: transform;
+}
+
+.tech-float-pill:hover {
+  transform: scale(1.18) translateZ(25px) !important;
+  background: rgba(217, 164, 65, 0.95);
+  color: #0d0a06;
+  border-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(217, 164, 65, 0.6);
+  z-index: 20 !important;
+}
+
+/* Pill Placement Positioning Around Panel */
+.pill-1 { top: 12px; left: 14px; }
+.pill-2 { top: 12px; right: 14px; }
+.pill-3 { bottom: 14px; left: 14px; }
+.pill-4 { bottom: 14px; right: 14px; }
+.pill-5 { top: 48%; left: 8px; transform: translateY(-50%); }
+.pill-6 { top: 48%; right: 8px; transform: translateY(-50%); }
+.pill-7 { top: 18px; left: 46%; transform: translateX(-50%); }
+.pill-8 { bottom: 18px; left: 46%; transform: translateX(-50%); }
+
+/* Centered Realistic Terminal Window */
+.terminal-window {
+  position: relative;
+  z-index: 5;
+  width: 255px;
+  background: rgba(10, 8, 6, 0.92);
+  border: none !important;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 164, 65, 0.2);
+  transform: translateZ(10px);
+  transition: box-shadow 0.3s ease;
+}
+
+.ai-terminal-showcase:hover .terminal-window {
+  border: none !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9), 0 0 28px rgba(217, 164, 65, 0.35);
+}
+
+.terminal-header {
+  height: 26px;
+  background: rgba(24, 20, 14, 0.95);
+  border-bottom: 1px solid rgba(217, 164, 65, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.terminal-dots .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.terminal-title {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.terminal-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #27c93f;
+  letter-spacing: 0.06em;
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #27c93f;
+  box-shadow: 0 0 8px #27c93f;
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.terminal-body {
+  padding: 10px 12px;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 10.5px;
+  line-height: 1.5;
+  color: #f0c876;
+  min-height: 95px;
+}
+
+.terminal-line {
+  white-space: nowrap;
+  margin-bottom: 2px;
+}
+
+.terminal-line.success {
+  color: #27c93f;
+}
+
+.terminal-line.info {
+  color: #f0c876;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  color: var(--gold);
+  font-weight: 700;
+  margin-left: 2px;
+  animation: blinkCursor 0.9s infinite step-start;
+}
+
+@keyframes blinkCursor {
+  50% { opacity: 0; }
+}
   
 
 
@@ -610,70 +800,197 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
 
 
-/* marquee icon  */
-.stripe{
-    width: 100%;
-    height: 20vh;
-    padding: 1vw 0vw;
-    overflow: hidden;
-    position: relative;
-    /* background-color: greenyellow; */
+/* ============================================================
+   Tesla + Apple + Active Theory 3D Conveyor Belt Marquee
+   ============================================================ */
 
-  }
-  .cnt{
-    width: fit-content;
-    display: flex;
-    align-items: center;
+.belt-marquee-section {
+  position: relative;
+  width: 100%;
+  padding: 60px 0 75px;
+  overflow: hidden;
+  perspective: 1400px;
+  user-select: none;
+  background: radial-gradient(ellipse at 50% 50%, rgba(24, 20, 14, 0.95) 0%, rgba(10, 8, 6, 0.98) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9);
+}
 
-  }
-  .bgcnt{
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    opacity: 0;
+.belt-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
 
-  }
-  .elem{
-    /* background-color: yellow; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    color: #fff;
-    padding: 0 3vw;
-    border-bottom: 1px solid #3b39397d;
-    border-top: 1px solid #3b39398b;
-   
-  }
-  .photo{
-    width: 6vw;
-    height: 6vw;
-    background-color: #dadada;
-    border: 2px solid #dadada;
-    border-radius: 25px;
-    overflow: hidden;
-  }
-  .photo>img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .elem>h1{
-    display: flex;
-  gap: 20px;
-  }
-  .elem>h1>span{
-    font-size: 12px;
-  }
-  .stripe2{
-    width: 100%;
-    height: 0%;
-    background-color: #d9a441;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
+.belt-radial-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 250px;
+  background: radial-gradient(ellipse, rgba(217, 164, 65, 0.25) 0%, rgba(217, 164, 65, 0) 75%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.belt-cinematic-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 224, 130, 0.6), transparent);
+  box-shadow: 0 0 20px rgba(217, 164, 65, 0.8);
+  z-index: 3;
+}
+
+.belt-stage-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  position: relative;
+  z-index: 5;
+}
+
+/* 3D Conveyor Track Pitch & Angle */
+.belt-track {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  width: max-content;
+  transform: rotateX(18deg) rotateZ(-1.5deg) translateZ(-20px);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Individual Physical Card Package Wrapper */
+.belt-card-wrap {
+  position: relative;
+  transform-style: preserve-3d;
+  padding-bottom: 24px;
+}
+
+/* 3D Physical Object Card */
+.belt-card {
+  width: 240px;
+  height: 140px;
+  padding: 20px 22px;
+  border-radius: 18px;
+  
+  background: linear-gradient(
+    135deg,
+    rgba(28, 24, 18, 0.95) 0%,
+    rgba(18, 15, 11, 0.98) 60%,
+    rgba(10, 8, 6, 1) 100%
+  );
+  border: 1.5px solid rgba(217, 164, 65, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(217, 164, 65, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    
+  transition: 
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+    
+  will-change: transform;
+}
+
+.card-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.card-badge {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--gold-soft);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.belt-card h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  margin: 4px 0 2px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.belt-card p {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  line-height: 1.35;
+}
+
+.card-footer-spec {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(217, 164, 65, 0.6);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* Projected Ground Shadow beneath card */
+.card-ground-shadow {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 210px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.85);
+  filter: blur(10px);
+  pointer-events: none;
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Tesla / Apple Lift & Specular Glow Interaction */
+.belt-card-wrap:hover .belt-card {
+  transform: translateY(-22px) translateZ(60px) rotateY(8deg) rotateX(-6deg) scale(1.08) !important;
+  border-color: rgba(255, 224, 130, 0.95);
+  box-shadow: 
+    0 30px 65px rgba(0, 0, 0, 0.95),
+    0 0 45px rgba(217, 164, 65, 0.65),
+    inset 0 1px 3px rgba(255, 255, 255, 0.6);
+  z-index: 80 !important;
+}
+
+.belt-card-wrap:hover .card-ground-shadow {
+  transform: translateX(-50%) scale(1.25);
+  opacity: 0.5;
+  filter: blur(16px);
+}
 
 
 
